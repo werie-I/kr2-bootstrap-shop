@@ -1,0 +1,399 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заявка — Чайный клуб</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+
+<!-- Навигация -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+    <div class="container py-2">
+
+        <a class="navbar-brand fw-bold" href="index.html">
+            ЧАЙНЫЙ КЛУБ
+        </a>
+
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#mainNavbar"
+            aria-controls="mainNavbar"
+            aria-expanded="false"
+            aria-label="Открыть меню"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav ms-auto gap-lg-3">
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html">Главная</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="catalog.html">Чайная карта</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="order.html">Мероприятия</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="index.html#about">О клубе</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+
+<main class="container my-5">
+
+    <!-- Заголовок -->
+    <div class="text-center mb-5">
+        <span class="badge bg-success mb-3">Чайный клуб</span>
+
+        <h1 class="fw-bold">Оставить заявку</h1>
+
+        <p class="text-secondary">
+            Заполните форму, чтобы записаться на дегустацию
+            или мероприятие нашего клуба.
+        </p>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-8">
+
+            <div class="card shadow-sm border-0">
+                <div class="card-body p-4 p-md-5">
+
+                    <h2 class="h4 mb-4">Ваши данные</h2>
+
+                    <!-- Форма -->
+                    <form>
+
+                        <!-- Имя -->
+                        <div class="mb-3">
+                            <label for="order-name" class="form-label">
+                                Ваше имя
+                            </label>
+
+                            <input
+                                type="text"
+                                class="form-control"
+                                id="order-name"
+                                name="name"
+                                placeholder="Введите имя"
+                                required
+                            >
+                        </div>
+
+                        <!-- Email -->
+                        <div class="mb-3">
+                            <label for="order-email" class="form-label">
+                                Электронная почта
+                            </label>
+
+                            <div class="input-group">
+                                <span class="input-group-text">@</span>
+
+                                <input
+                                    type="email"
+                                    class="form-control"
+                                    id="order-email"
+                                    name="email"
+                                    placeholder="example@mail.com"
+                                    required
+                                >
+                            </div>
+                        </div>
+
+                        <!-- Телефон -->
+                        <div class="mb-3">
+                            <label for="order-phone" class="form-label">
+                                Номер телефона
+                            </label>
+
+                            <input
+                                type="tel"
+                                class="form-control"
+                                id="order-phone"
+                                name="phone"
+                                placeholder="+7 (999) 123-45-67"
+                            >
+                        </div>
+
+                        <!-- Выбор мероприятия -->
+                        <div class="mb-3">
+                            <label for="order-event" class="form-label">
+                                Выберите мероприятие
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="order-event"
+                                name="event"
+                                required
+                            >
+                                <option value="" selected disabled>
+                                    Выберите вариант
+                                </option>
+
+                                <option value="tasting">
+                                    Дегустация чая
+                                </option>
+
+                                <option value="masterclass">
+                                    Мастер-класс
+                                </option>
+
+                                <option value="meeting">
+                                    Чайная встреча
+                                </option>
+                            </select>
+                        </div>
+
+                        <!-- Дата -->
+                        <div class="mb-3">
+                            <label for="order-date" class="form-label">
+                                Желаемая дата
+                            </label>
+
+                            <input
+                                type="date"
+                                class="form-control"
+                                id="order-date"
+                                name="date"
+                                required
+                            >
+                        </div>
+
+                        <!-- Количество участников -->
+                        <div class="mb-3">
+                            <label for="order-count" class="form-label">
+                                Количество участников
+                            </label>
+
+                            <select
+                                class="form-select"
+                                id="order-count"
+                                name="count"
+                            >
+                                <option value="1">1 человек</option>
+                                <option value="2">2 человека</option>
+                                <option value="3-5">3–5 человек</option>
+                                <option value="6+">Более 5 человек</option>
+                            </select>
+                        </div>
+
+                        <!-- Комментарий -->
+                        <div class="mb-4">
+                            <label for="order-message" class="form-label">
+                                Дополнительная информация
+                            </label>
+
+                            <textarea
+                                class="form-control"
+                                id="order-message"
+                                name="message"
+                                rows="4"
+                                placeholder="Ваши пожелания..."
+                            ></textarea>
+                        </div>
+
+                        <!-- Согласие -->
+                        <div class="form-check mb-4">
+                            <input
+                                class="form-check-input"
+                                type="checkbox"
+                                id="order-agreement"
+                                required
+                            >
+
+                            <label
+                                class="form-check-label"
+                                for="order-agreement"
+                            >
+                                Я согласен(на) на обработку персональных данных
+                            </label>
+                        </div>
+
+                        <!-- Кнопка -->
+                        <button
+                            type="button"
+                            class="btn btn-success btn-lg w-100"
+                            data-bs-toggle="modal"
+                            data-bs-target="#successModal"
+                        >
+                            Отправить заявку
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
+
+            <!-- Информационное сообщение -->
+            <div class="alert alert-info mt-4" role="alert">
+                Обратите внимание: это демонстрационная форма.
+                Данные не отправляются на сервер.
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+
+<section class="mt-5">
+    <h2 class="h4 mb-4">Частые вопросы</h2>
+
+    <div class="accordion" id="faqAccordion">
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button
+                    class="accordion-button"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faqOne"
+                    aria-expanded="true"
+                    aria-controls="faqOne"
+                >
+                    Как записаться на мероприятие?
+                </button>
+            </h3>
+
+            <div
+                id="faqOne"
+                class="accordion-collapse collapse show"
+                data-bs-parent="#faqAccordion"
+            >
+                <div class="accordion-body">
+                    Заполните форму выше, укажите свои контактные данные
+                    и выберите интересующее мероприятие.
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faqTwo"
+                    aria-expanded="false"
+                    aria-controls="faqTwo"
+                >
+                    Где используется Bootstrap?
+                </button>
+            </h3>
+
+            <div
+                id="faqTwo"
+                class="accordion-collapse collapse"
+                data-bs-parent="#faqAccordion"
+            >
+                <div class="accordion-body">
+                    Bootstrap используется для создания сетки,
+                    карточек, форм, навигации, сообщений и модальных окон.
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h3 class="accordion-header">
+                <button
+                    class="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#faqThree"
+                    aria-expanded="false"
+                    aria-controls="faqThree"
+                >
+                    Нужно ли оплачивать заявку заранее?
+                </button>
+            </h3>
+
+            <div
+                id="faqThree"
+                class="accordion-collapse collapse"
+                data-bs-parent="#faqAccordion"
+            >
+                <div class="accordion-body">
+                    Нет. Форма является демонстрационной и используется
+                    для ознакомления с мероприятиями клуба.
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- Модальное окно -->
+<div
+    class="modal fade"
+    id="successModal"
+    tabindex="-1"
+    aria-labelledby="successModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title fs-5" id="successModalLabel">
+                    Заявка подготовлена
+                </h2>
+
+                <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Закрыть"
+                ></button>
+            </div>
+
+            <div class="modal-body">
+                Спасибо за интерес к нашему чайному клубу!
+                Это демонстрационное сообщение.
+            </div>
+
+            <div class="modal-footer">
+                <button
+                    type="button"
+                    class="btn btn-success"
+                    data-bs-dismiss="modal"
+                >
+                    Понятно
+                </button>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- Подвал -->
+<footer class="py-4 bg-light">
+    <div class="container text-center">
+        <p class="mb-0 text-secondary">
+            © 2026 Чайный клуб. Все права защищены.
+        </p>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
