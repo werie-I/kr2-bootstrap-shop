@@ -1,0 +1,813 @@
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>История чая — Чайный клуб</title>
+<meta content="История чая, традиции и культура чаепития в разных странах." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<style>
+:root {
+    --ink:#242b22;
+    --dark:#303a2e;
+    --cream:#f5f2ea;
+    --paper:#ebe7dc;
+    --muted:#77786e;
+    --gold:#aa9162;
+    --line:rgba(36,43,34,.16);
+}
+
+* { box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:"DM Sans",sans-serif;
+}
+
+a { color:inherit; text-decoration:none; }
+
+img { display:block; max-width:100%; }
+
+.container-premium {
+    width:min(1320px,calc(100% - 80px));
+    margin:auto;
+}
+
+.serif { font-family:"Playfair Display",Georgia,serif; }
+
+.eyebrow {
+    color:var(--gold);
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-weight:700;
+}
+
+/* NAVIGATION */
+
+.navbar-premium {
+    background:var(--cream);
+    border-bottom:1px solid var(--line);
+}
+
+.nav-inner {
+    min-height:82px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.brand {
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:4px;
+}
+
+.brand small {
+    display:block;
+    font-size:8px;
+    letter-spacing:3px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+.nav-links {
+    display:flex;
+    gap:19px;
+    font-size:11px;
+}
+
+.nav-links a:hover { color:var(--gold); }
+
+.menu-button {
+    display:none;
+    border:1px solid var(--line);
+    background:none;
+    padding:9px 13px;
+    font-size:11px;
+}
+
+/* HERO */
+
+.history-hero {
+    min-height:610px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    background:#303a2e;
+    color:white;
+}
+
+.history-hero img {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.history-hero::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        90deg,
+        rgba(24,32,25,.88),
+        rgba(24,32,25,.5) 60%,
+        rgba(24,32,25,.1)
+    );
+}
+
+.hero-content {
+    position:relative;
+    z-index:2;
+    width:min(1320px,calc(100% - 80px));
+    margin:auto;
+    padding:90px 0;
+}
+
+.history-hero h1 {
+    font-size:clamp(52px,8vw,100px);
+    line-height:1.05;
+    margin:27px 0;
+}
+
+.history-hero p {
+    max-width:460px;
+    color:rgba(255,255,255,.75);
+    font-size:13px;
+    line-height:2;
+}
+
+/* INTRO */
+
+.intro {
+    padding:110px 0;
+    text-align:center;
+}
+
+.intro h2 {
+    max-width:850px;
+    margin:24px auto;
+    font-size:clamp(35px,5vw,62px);
+    line-height:1.2;
+}
+
+.intro p {
+    max-width:620px;
+    margin:auto;
+    color:var(--muted);
+    font-size:13px;
+    line-height:2;
+}
+
+/* TIMELINE */
+
+.timeline-section {
+    padding:100px 0;
+    background:var(--paper);
+}
+
+.section-title {
+    margin-bottom:65px;
+}
+
+.section-title h2 {
+    font-size:clamp(38px,5vw,58px);
+    margin:16px 0;
+}
+
+.section-title p {
+    color:var(--muted);
+    font-size:13px;
+    max-width:500px;
+    line-height:1.9;
+}
+
+.timeline {
+    max-width:950px;
+    margin:auto;
+    position:relative;
+}
+
+.timeline::before {
+    content:"";
+    position:absolute;
+    top:10px;
+    bottom:10px;
+    left:50%;
+    width:1px;
+    background:rgba(36,43,34,.25);
+    transform:translateX(-50%);
+}
+
+.timeline-item {
+    display:grid;
+    grid-template-columns:1fr 70px 1fr;
+    align-items:center;
+    margin-bottom:65px;
+    position:relative;
+}
+
+.timeline-item:last-child { margin-bottom:0; }
+
+.timeline-dot {
+    grid-column:2;
+    grid-row:1;
+    width:13px;
+    height:13px;
+    background:var(--gold);
+    border:3px solid var(--paper);
+    border-radius:50%;
+    justify-self:center;
+    z-index:2;
+    box-shadow:0 0 0 1px var(--gold);
+}
+
+.timeline-content {
+    padding:0 35px;
+}
+
+.timeline-item:nth-child(odd) .timeline-content {
+    grid-column:1;
+    grid-row:1;
+    text-align:right;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+    grid-column:3;
+    grid-row:1;
+    text-align:left;
+}
+
+.timeline-year {
+    color:var(--gold);
+    font-size:12px;
+    letter-spacing:2px;
+    font-weight:700;
+}
+
+.timeline-content h3 {
+    font-family:"Playfair Display",Georgia,serif;
+    font-size:26px;
+    margin:13px 0;
+}
+
+.timeline-content p {
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.9;
+    margin:0;
+}
+
+/* COUNTRY STORIES */
+
+.origins {
+    padding:110px 0;
+}
+
+.origin-grid {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:75px;
+    align-items:center;
+    margin-bottom:100px;
+}
+
+.origin-grid:last-child { margin-bottom:0; }
+
+.origin-grid.reverse .origin-image {
+    order:2;
+}
+
+.origin-image {
+    width:100%;
+    height:490px;
+    object-fit:cover;
+}
+
+.origin-content h2 {
+    font-size:clamp(38px,4vw,57px);
+    line-height:1.15;
+    margin:20px 0;
+}
+
+.origin-content p {
+    color:var(--muted);
+    font-size:13px;
+    line-height:2;
+    max-width:470px;
+}
+
+.origin-number {
+    color:var(--gold);
+    font-size:11px;
+    letter-spacing:2px;
+    margin-bottom:15px;
+}
+
+/* FACTS */
+
+.facts {
+    background:var(--dark);
+    color:white;
+    padding:95px 0;
+}
+
+.facts-heading {
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.facts-heading h2 {
+    font-size:clamp(36px,5vw,55px);
+    margin-top:18px;
+}
+
+.facts-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:1px;
+    background:rgba(255,255,255,.18);
+    border:1px solid rgba(255,255,255,.18);
+}
+
+.fact-card {
+    padding:38px 30px;
+    background:var(--dark);
+}
+
+.fact-number {
+    font-family:"Playfair Display",Georgia,serif;
+    font-size:45px;
+    color:#d0bc91;
+    margin-bottom:17px;
+}
+
+.fact-card h3 {
+    font-size:15px;
+    margin-bottom:12px;
+}
+
+.fact-card p {
+    color:rgba(255,255,255,.62);
+    font-size:12px;
+    line-height:1.9;
+    margin:0;
+}
+
+/* QUOTE */
+
+.quote-section {
+    padding:120px 20px;
+    text-align:center;
+}
+
+.quote-section blockquote {
+    max-width:850px;
+    margin:25px auto;
+    font-size:clamp(32px,5vw,59px);
+    line-height:1.25;
+}
+
+.quote-section p {
+    color:var(--muted);
+    font-size:11px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+}
+
+/* CTA */
+
+.history-cta {
+    padding:95px 20px;
+    background:var(--paper);
+    text-align:center;
+}
+
+.history-cta h2 {
+    font-size:clamp(38px,5vw,60px);
+    margin:20px 0;
+}
+
+.history-cta p {
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.9;
+}
+
+.cta-button {
+    display:inline-block;
+    margin-top:22px;
+    padding:16px 25px;
+    background:var(--dark);
+    color:white;
+    font-size:10px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+.cta-button:hover {
+    background:var(--gold);
+    color:white;
+}
+
+/* FOOTER */
+
+.footer {
+    background:#20291f;
+    color:white;
+    padding:55px 0 25px;
+}
+
+.footer-title {
+    font-size:18px;
+    letter-spacing:4px;
+    font-weight:700;
+}
+
+.footer p {
+    color:rgba(255,255,255,.55);
+    font-size:11px;
+    line-height:1.9;
+    max-width:280px;
+}
+
+.footer h4 {
+    color:#c1ad85;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+.footer a {
+    display:block;
+    color:rgba(255,255,255,.65);
+    font-size:11px;
+    margin-bottom:12px;
+}
+
+.footer a:hover { color:white; }
+
+.footer-bottom {
+    border-top:1px solid rgba(255,255,255,.14);
+    margin-top:40px;
+    padding-top:20px;
+    color:rgba(255,255,255,.45);
+    font-size:10px;
+}
+
+@media(max-width:900px) {
+    .nav-inner { flex-wrap:wrap; padding:17px 0; }
+    .menu-button { display:block; }
+    .nav-links {
+        display:none;
+        width:100%;
+        flex-direction:column;
+        gap:0;
+        padding:10px 0;
+    }
+    .nav-links.open { display:flex; }
+    .nav-links a { padding:9px 0; }
+
+    .origin-grid {
+        grid-template-columns:1fr;
+        gap:30px;
+    }
+
+    .origin-grid.reverse .origin-image { order:0; }
+}
+
+@media(max-width:600px) {
+    .container-premium,
+    .hero-content {
+        width:calc(100% - 36px);
+    }
+
+    .history-hero { min-height:550px; }
+
+    .intro,
+    .timeline-section,
+    .origins,
+    .facts {
+        padding:70px 0;
+    }
+
+    .timeline::before {
+        left:8px;
+    }
+
+    .timeline-item {
+        grid-template-columns:25px 1fr;
+        margin-bottom:45px;
+    }
+
+    .timeline-dot {
+        grid-column:1;
+        grid-row:1;
+    }
+
+    .timeline-item:nth-child(odd) .timeline-content,
+    .timeline-item:nth-child(even) .timeline-content {
+        grid-column:2;
+        grid-row:1;
+        text-align:left;
+        padding:0 0 0 20px;
+    }
+
+    .origin-image { height:330px; }
+
+    .facts-grid { grid-template-columns:1fr; }
+
+    .fact-card { padding:28px; }
+
+    .quote-section { padding:80px 20px; }
+}
+</style>
+<link href="css/site-components.css" rel="stylesheet"/>
+</head>
+<body>
+<div data-site-header=""></div>
+<header class="history-hero">
+<img alt="Чайная композиция" src="https://images.unsplash.com/photo-1754557178022-a6333073ac07?w=1800"/>
+<div class="hero-content">
+<span class="eyebrow">Путешествие сквозь века</span>
+<h1 class="serif">
+            История,<br/>
+            заваренная<br/>
+            временем.
+        </h1>
+<p>
+            От древних традиций Востока до современных
+            чайных пространств. Узнайте, как один напиток
+            объединил культуры и континенты.
+        </p>
+</div>
+</header>
+<section class="intro">
+<div class="container-premium">
+<span class="eyebrow">Больше, чем напиток</span>
+<h2 class="serif">
+            История чая — это история
+            путешествий, открытий и традиций.
+        </h2>
+<p>
+            На протяжении столетий чай менял привычки,
+            вдохновлял путешественников и становился
+            важной частью повседневной жизни разных народов.
+            Сегодня эта история продолжается в каждой чашке.
+        </p>
+</div>
+</section>
+<section class="timeline-section">
+<div class="container-premium">
+<div class="section-title">
+<span class="eyebrow">Хронология</span>
+<h2 class="serif">Путь длиною в века</h2>
+<p>
+                Несколько важных этапов в истории напитка,
+                который стал частью мировой культуры.
+            </p>
+</div>
+<div class="timeline">
+<article class="timeline-item">
+<div class="timeline-content">
+<div class="timeline-year">ДРЕВНИЙ КИТАЙ</div>
+<h3>Легенда о чае</h3>
+<p>
+                        Согласно известной китайской легенде,
+                        император Шэнь-нун открыл чай, когда
+                        листья случайно попали в горячую воду.
+                    </p>
+</div>
+<div class="timeline-dot"></div>
+</article>
+<article class="timeline-item">
+<div class="timeline-content">
+<div class="timeline-year">VII–X ВЕКА</div>
+<h3>Распространение традиции</h3>
+<p>
+                        Чай становится важной частью китайской
+                        культуры. Развиваются способы обработки
+                        листа и приготовления напитка.
+                    </p>
+</div>
+<div class="timeline-dot"></div>
+</article>
+<article class="timeline-item">
+<div class="timeline-content">
+<div class="timeline-year">XII–XVI ВЕКА</div>
+<h3>Чай в Японии</h3>
+<p>
+                        Чайные практики получают развитие
+                        в Японии. Формируются традиции,
+                        связанные с вниманием, эстетикой
+                        и особым ритуалом приготовления.
+                    </p>
+</div>
+<div class="timeline-dot"></div>
+</article>
+<article class="timeline-item">
+<div class="timeline-content">
+<div class="timeline-year">XVII ВЕК</div>
+<h3>Знакомство Европы с чаем</h3>
+<p>
+                        Чай становится известен европейским
+                        торговцам и постепенно входит
+                        в моду среди состоятельных семей.
+                    </p>
+</div>
+<div class="timeline-dot"></div>
+</article>
+<article class="timeline-item">
+<div class="timeline-content">
+<div class="timeline-year">XIX ВЕК</div>
+<h3>Мировая торговля</h3>
+<p>
+                        Чайная торговля приобретает
+                        международный масштаб. Развиваются
+                        плантации, маршруты и новые традиции.
+                    </p>
+</div>
+<div class="timeline-dot"></div>
+</article>
+<article class="timeline-item">
+<div class="timeline-content">
+<div class="timeline-year">НАШИ ДНИ</div>
+<h3>Новая культура чая</h3>
+<p>
+                        Сегодня чай объединяет традиции
+                        и современный образ жизни:
+                        от классических церемоний
+                        до авторских чайных коллекций.
+                    </p>
+</div>
+<div class="timeline-dot"></div>
+</article>
+</div>
+</div>
+</section>
+<section class="origins">
+<div class="container-premium">
+<div class="origin-grid">
+<img alt="Китайская чайная традиция" class="origin-image" src="https://images.unsplash.com/photo-1758272256506-b52fac1d17ac?w=1100"/>
+<div class="origin-content">
+<div class="origin-number">01 / КИТАЙ</div>
+<span class="eyebrow">Родина чайной культуры</span>
+<h2 class="serif">Искусство древних традиций.</h2>
+<p>
+                    Китай занимает особое место в истории чая.
+                    Здесь сформировались многочисленные способы
+                    обработки листа, приготовления и дегустации.
+                </p>
+<p>
+                    Чай стал не просто напитком, а частью
+                    философии гостеприимства, общения
+                    и повседневной культуры.
+                </p>
+</div>
+</div>
+<div class="origin-grid reverse">
+<img alt="Японская чайная культура" class="origin-image" src="https://images.unsplash.com/photo-1753009712810-3f72c3f72548?w=1100"/>
+<div class="origin-content">
+<div class="origin-number">02 / ЯПОНИЯ</div>
+<span class="eyebrow">Красота простоты</span>
+<h2 class="serif">Ритуал осознанности.</h2>
+<p>
+                    Японская чайная культура известна
+                    вниманием к деталям, эстетикой пространства
+                    и уважением к каждому этапу приготовления.
+                </p>
+<p>
+                    Особое место занимает чайная церемония,
+                    в которой важны не только вкус напитка,
+                    но и атмосфера момента.
+                </p>
+</div>
+</div>
+<div class="origin-grid">
+<img alt="Чайная плантация в Дарджилинге, Индия" class="origin-image" src="https://images.unsplash.com/photo-1677858741808-c843c4fcb81f?w=1100"/>
+<div class="origin-content">
+<div class="origin-number">03 / ИНДИЯ</div>
+<span class="eyebrow">Насыщенность и характер</span>
+<h2 class="serif">Чай с ярким характером.</h2>
+<p>
+                    Индия стала одним из крупнейших мировых
+                    регионов выращивания чая. Особую известность
+                    получили сорта Ассам и Дарджилинг.
+                </p>
+<p>
+                    Индийские чайные традиции разнообразны:
+                    от крепкого чёрного чая до ароматного
+                    масала-чая со специями.
+                </p>
+</div>
+</div>
+</div>
+</section>
+<section class="facts">
+<div class="container-premium">
+<div class="facts-heading">
+<span class="eyebrow">Немного интересного</span>
+<h2 class="serif">Чай в деталях</h2>
+</div>
+<div class="facts-grid">
+<article class="fact-card">
+<div class="fact-number">01</div>
+<h3>Разнообразие сортов</h3>
+<p>
+                    Зелёный, чёрный, белый и улун получают
+                    из листьев одного растения — Camellia sinensis.
+                    Различия во многом связаны с обработкой.
+                </p>
+</article>
+<article class="fact-card">
+<div class="fact-number">02</div>
+<h3>Целая культура</h3>
+<p>
+                    В разных странах существуют собственные
+                    традиции заваривания, подачи и употребления чая.
+                </p>
+</article>
+<article class="fact-card">
+<div class="fact-number">03</div>
+<h3>Внимание к деталям</h3>
+<p>
+                    На вкус напитка влияют сорт листа,
+                    температура воды, время заваривания
+                    и качество хранения.
+                </p>
+</article>
+</div>
+</div>
+</section>
+<section class="quote-section">
+<span class="eyebrow">Философия момента</span>
+<blockquote class="serif">
+        «Чай — это маленькое путешествие,
+        для которого не нужно покидать дом».
+    </blockquote>
+<p>Чайный клуб · Наша философия</p>
+</section>
+<section class="history-cta">
+<span class="eyebrow">Продолжите знакомство</span>
+<h2 class="serif">История продолжается в вашей чашке.</h2>
+<p>
+        Откройте коллекцию и выберите сорт,
+        с которого начнётся ваша собственная история.
+    </p>
+<a class="cta-button" href="catalog.html">
+        Перейти к коллекции ↗
+    </a>
+</section>
+<footer class="footer">
+<div class="container-premium">
+<div class="row g-5">
+<div class="col-lg-4">
+<div class="footer-title">ЧАЙНЫЙ КЛУБ</div>
+<p class="mt-3">
+                    Пространство чайной культуры,
+                    выразительных вкусов и особенных ритуалов.
+                </p>
+</div>
+<div class="col-6 col-lg-2">
+<h4>Магазин</h4>
+<a href="catalog.html">Каталог</a>
+<a href="favorites.html">Избранное</a>
+<a href="cart.html">Корзина</a>
+<a href="order.html">Заказ</a>
+</div>
+<div class="col-6 col-lg-3">
+<h4>Мир чая</h4>
+<a href="ceremony.html">Церемонии</a>
+<a href="tea-guide.html">Подбор чая</a>
+<a href="tea-history.html">История чая</a>
+<a href="reviews.html">Отзывы</a>
+</div>
+<div class="col-lg-3">
+<h4>Информация</h4>
+<a href="contacts.html">Контакты</a>
+<a href="index.html">Главная</a>
+</div>
+</div>
+<div class="footer-bottom">
+            © 2026 Чайный клуб · Искусство настоящего чая
+        </div>
+</div>
+</footer>
+
+<script src="js/components.js"></script>
+</body>
+</html>

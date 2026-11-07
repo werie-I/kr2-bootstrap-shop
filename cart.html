@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Корзина — Чайный клуб</title>
+<meta content="Корзина Чайного клуба: просмотр выбранных товаров и итоговой суммы." name="description"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<link href="css/custom.css" rel="stylesheet"/>
+<link href="css/site-components.css" rel="stylesheet"/>
+</head>
+<body>
+<div data-site-header=""></div>
+<main class="container my-5">
+
+<h1 class="fw-bold mb-4">Корзина</h1>
+<div class="row g-4">
+<div class="col-12 col-lg-8">
+<div id="cartItems">
+<div class="alert alert-light border">
+                    Корзина пока пуста. Перейдите в каталог, чтобы выбрать чай.
+                </div>
+</div>
+</div>
+<div class="col-12 col-lg-4">
+<div class="card shadow-sm">
+<div class="card-body">
+<h2 class="h5 fw-bold">Ваш заказ</h2>
+<div class="d-flex justify-content-between my-3">
+<span>Количество товаров:</span>
+<strong id="cartCount">0</strong>
+</div>
+<hr/>
+<div class="d-flex justify-content-between mb-3">
+<span>Итого:</span>
+<strong class="fs-4" id="cartTotal">0 ₽</strong>
+</div>
+<a class="btn btn-success w-100 mb-2" href="order.html" id="checkoutButton">
+                        Перейти к оформлению
+                    </a>
+<a class="btn btn-outline-secondary w-100" href="catalog.html">
+                        Продолжить покупки
+                    </a>
+</div>
+</div>
+</div>
+</div>
+</main>
+<footer class="bg-dark text-white py-4 mt-5">
+<div class="container text-center">
+<p class="mb-1">Чайный клуб</p>
+<small>© 2026. Все права защищены.</small>
+</div>
+</footer>
+<script>
+    const CART_KEY = "teaCart";
+
+    function getCart() {
+        return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+    }
+
+    function saveCart(cart) {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    }
+
+    function renderCart() {
+        const cart = getCart();
+        const cartItems = document.getElementById("cartItems");
+        const cartCount = document.getElementById("cartCount");
+        const cartTotal = document.getElementById("cartTotal");
+        const checkoutButton = document.getElementById("checkoutButton");
+
+        if (cart.length === 0) {
+            cartItems.innerHTML = `
+                <div class="alert alert-light border">
+                    Корзина пока пуста. Перейдите в каталог, чтобы выбрать чай.
+                </div>`;
+        } else {
+            cartItems.innerHTML = cart.map((item, index) => `
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <div class="row align-items-center g-3">
+                            <div class="col-4 col-md-3">
+                                <img src="${item.image}" alt="${item.name}"
+                                    class="img-fluid rounded"
+                                    style="height: 100px; width: 100%; object-fit: cover;">
+                            </div>
+
+                            <div class="col-8 col-md-9">
+                                <div class="d-flex justify-content-between flex-wrap gap-2">
+                                    <h2 class="h6 fw-bold">${item.name}</h2>
+                                    <strong>${item.price * item.quantity} ₽</strong>
+                                </div>
+
+                                <p class="text-secondary mb-2">${item.price} ₽ за упаковку</p>
+
+                                <div class="d-flex align-items-center gap-2">
+                                    <button class="btn btn-outline-secondary btn-sm"
+                                        onclick="changeQuantity(${index}, -1)">−</button>
+
+                                    <span>${item.quantity}</span>
+
+                                    <button class="btn btn-outline-secondary btn-sm"
+                                        onclick="changeQuantity(${index}, 1)">+</button>
+
+                                    <button class="btn btn-outline-danger btn-sm ms-auto"
+                                        onclick="removeItem(${index})">Удалить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join("");
+        }
+
+        const count = cart.reduce((sum, item) => sum + item.quantity, 0);
+        const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+        cartCount.textContent = count;
+        cartTotal.textContent = total.toLocaleString("ru-RU") + " ₽";
+        checkoutButton.classList.toggle("disabled", cart.length === 0);
+        checkoutButton.setAttribute("aria-disabled", cart.length === 0);
+    }
+
+    function changeQuantity(index, change) {
+        const cart = getCart();
+        cart[index].quantity += change;
+
+        if (cart[index].quantity <= 0) {
+            cart.splice(index, 1);
+        }
+
+        saveCart(cart);
+        renderCart();
+    }
+
+    function removeItem(index) {
+        const cart = getCart();
+        cart.splice(index, 1);
+        saveCart(cart);
+        renderCart();
+    }
+
+    renderCart();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="js/components.js"></script>
+</body>
+</html>

@@ -1,0 +1,1049 @@
+
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Подбор чая — Чайный клуб</title>
+<meta content="Интерактивный подбор чая по вкусовым предпочтениям." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<style>
+:root {
+    --ink:#242b22;
+    --dark:#303a2e;
+    --cream:#f5f2ea;
+    --paper:#ebe7dc;
+    --muted:#77786e;
+    --gold:#aa9162;
+    --line:rgba(36,43,34,.16);
+}
+
+* { box-sizing:border-box; }
+
+html { scroll-behavior:smooth; }
+
+body {
+    margin:0;
+    background:var(--cream);
+    color:var(--ink);
+    font-family:"DM Sans",sans-serif;
+}
+
+a { color:inherit; text-decoration:none; }
+
+.container-premium {
+    width:min(1320px,calc(100% - 80px));
+    margin:auto;
+}
+
+.serif { font-family:"Playfair Display",Georgia,serif; }
+
+.eyebrow {
+    color:var(--gold);
+    font-size:10px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    font-weight:700;
+}
+
+/* NAVIGATION */
+
+.navbar-premium {
+    background:var(--cream);
+    border-bottom:1px solid var(--line);
+}
+
+.nav-inner {
+    min-height:82px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:25px;
+}
+
+.brand {
+    font-size:18px;
+    font-weight:700;
+    letter-spacing:4px;
+}
+
+.brand small {
+    display:block;
+    font-size:8px;
+    letter-spacing:3px;
+    color:var(--muted);
+    margin-top:4px;
+}
+
+.nav-links {
+    display:flex;
+    gap:19px;
+    font-size:11px;
+}
+
+.nav-links a:hover { color:var(--gold); }
+
+.menu-button {
+    display:none;
+    border:1px solid var(--line);
+    background:none;
+    padding:9px 13px;
+    font-size:11px;
+}
+
+/* HERO */
+
+.hero {
+    min-height:560px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    overflow:hidden;
+    color:white;
+    background:#303a2e;
+}
+
+.hero img {
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.hero::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(90deg,
+        rgba(22,30,23,.9),
+        rgba(22,30,23,.55) 60%,
+        rgba(22,30,23,.12));
+}
+
+.hero-content {
+    position:relative;
+    z-index:2;
+    width:min(1320px,calc(100% - 80px));
+    margin:auto;
+    padding:90px 0;
+}
+
+.hero h1 {
+    font-size:clamp(52px,8vw,94px);
+    line-height:1.05;
+    margin:25px 0;
+}
+
+.hero p {
+    max-width:460px;
+    color:rgba(255,255,255,.75);
+    font-size:13px;
+    line-height:2;
+}
+
+/* INTRO */
+
+.intro {
+    padding:95px 0;
+    text-align:center;
+}
+
+.intro h2 {
+    max-width:800px;
+    margin:22px auto;
+    font-size:clamp(35px,5vw,58px);
+    line-height:1.2;
+}
+
+.intro p {
+    max-width:580px;
+    margin:auto;
+    color:var(--muted);
+    font-size:13px;
+    line-height:2;
+}
+
+/* QUIZ */
+
+.quiz-section {
+    padding:90px 0 110px;
+    background:var(--paper);
+}
+
+.quiz-wrapper {
+    max-width:850px;
+    margin:auto;
+    background:var(--cream);
+    padding:55px;
+}
+
+.quiz-top {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+    gap:15px;
+}
+
+.quiz-step {
+    font-size:10px;
+    letter-spacing:2px;
+    color:var(--gold);
+    text-transform:uppercase;
+}
+
+.progress-track {
+    width:100%;
+    height:3px;
+    background:var(--paper);
+    margin-bottom:45px;
+}
+
+.progress-bar {
+    height:3px;
+    width:25%;
+    background:var(--gold);
+    transition:width .3s;
+}
+
+.question {
+    display:none;
+}
+
+.question.active {
+    display:block;
+    animation:appear .3s ease;
+}
+
+@keyframes appear {
+    from { opacity:0; transform:translateY(8px); }
+    to { opacity:1; transform:translateY(0); }
+}
+
+.question h2 {
+    font-size:clamp(30px,4vw,43px);
+    line-height:1.2;
+    margin-bottom:12px;
+}
+
+.question-description {
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.8;
+    margin-bottom:30px;
+}
+
+.options {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+
+.option {
+    position:relative;
+}
+
+.option input {
+    position:absolute;
+    opacity:0;
+    pointer-events:none;
+}
+
+.option label {
+    display:flex;
+    align-items:center;
+    min-height:85px;
+    padding:18px;
+    border:1px solid var(--line);
+    cursor:pointer;
+    transition:.2s;
+    font-size:12px;
+    line-height:1.6;
+}
+
+.option label:hover {
+    border-color:var(--gold);
+}
+
+.option input:checked + label {
+    border-color:var(--dark);
+    background:var(--dark);
+    color:white;
+}
+
+.option-title {
+    display:block;
+    font-weight:600;
+    margin-bottom:4px;
+}
+
+.option small {
+    display:block;
+    opacity:.7;
+    font-size:10px;
+}
+
+.quiz-navigation {
+    display:flex;
+    justify-content:space-between;
+    gap:15px;
+    margin-top:40px;
+}
+
+.quiz-button {
+    padding:15px 25px;
+    border:1px solid var(--dark);
+    background:var(--dark);
+    color:white;
+    font-size:10px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    cursor:pointer;
+}
+
+.quiz-button:hover {
+    background:var(--gold);
+    border-color:var(--gold);
+}
+
+.quiz-button.secondary {
+    background:transparent;
+    color:var(--ink);
+}
+
+.quiz-button:disabled {
+    opacity:.4;
+    cursor:not-allowed;
+}
+
+/* RESULT */
+
+.result {
+    display:none;
+    text-align:center;
+}
+
+.result-image {
+    width:100%;
+    height:300px;
+    object-fit:cover;
+    margin:25px 0;
+}
+
+.result h2 {
+    font-size:clamp(35px,5vw,55px);
+    margin:15px 0;
+}
+
+.result p {
+    max-width:530px;
+    margin:15px auto;
+    color:var(--muted);
+    font-size:13px;
+    line-height:2;
+}
+
+.result-price {
+    font-weight:700;
+    margin:20px 0;
+    font-size:15px;
+}
+
+.result-actions {
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:25px;
+}
+
+.result-actions a,
+.result-actions button {
+    padding:15px 22px;
+    border:1px solid var(--dark);
+    background:var(--dark);
+    color:white;
+    font-size:10px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+    cursor:pointer;
+}
+
+.result-actions .restart {
+    background:transparent;
+    color:var(--ink);
+}
+
+/* GUIDE */
+
+.guide {
+    padding:100px 0;
+}
+
+.guide-heading {
+    margin-bottom:45px;
+}
+
+.guide-heading h2 {
+    font-size:clamp(38px,5vw,58px);
+    margin:15px 0;
+}
+
+.guide-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:24px;
+}
+
+.guide-card img {
+    width:100%;
+    height:280px;
+    object-fit:cover;
+}
+
+.guide-card h3 {
+    font-size:25px;
+    margin:20px 0 10px;
+}
+
+.guide-card p {
+    color:var(--muted);
+    font-size:12px;
+    line-height:1.9;
+}
+
+/* CTA */
+
+.final-cta {
+    padding:95px 20px;
+    background:var(--dark);
+    color:white;
+    text-align:center;
+}
+
+.final-cta h2 {
+    font-size:clamp(38px,5vw,60px);
+    margin:20px 0;
+}
+
+.final-cta p {
+    color:rgba(255,255,255,.65);
+    font-size:12px;
+}
+
+.final-cta a {
+    display:inline-block;
+    margin-top:20px;
+    padding:15px 24px;
+    background:var(--cream);
+    color:var(--ink);
+    font-size:10px;
+    letter-spacing:1px;
+    text-transform:uppercase;
+}
+
+/* FOOTER */
+
+.footer {
+    background:#20291f;
+    color:white;
+    padding:55px 0 25px;
+}
+
+.footer-title {
+    font-size:18px;
+    letter-spacing:4px;
+    font-weight:700;
+}
+
+.footer p {
+    color:rgba(255,255,255,.55);
+    font-size:11px;
+    line-height:1.9;
+    max-width:280px;
+}
+
+.footer h4 {
+    color:#c1ad85;
+    font-size:10px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    margin-bottom:20px;
+}
+
+.footer a {
+    display:block;
+    color:rgba(255,255,255,.65);
+    font-size:11px;
+    margin-bottom:12px;
+}
+
+.footer a:hover { color:white; }
+
+.footer-bottom {
+    border-top:1px solid rgba(255,255,255,.14);
+    margin-top:40px;
+    padding-top:20px;
+    color:rgba(255,255,255,.45);
+    font-size:10px;
+}
+
+@media(max-width:950px) {
+    .nav-inner { flex-wrap:wrap; padding:17px 0; }
+    .menu-button { display:block; }
+    .nav-links {
+        display:none;
+        width:100%;
+        flex-direction:column;
+        gap:0;
+        padding:10px 0;
+    }
+    .nav-links.open { display:flex; }
+    .nav-links a { padding:9px 0; }
+    .guide-grid { grid-template-columns:1fr 1fr; }
+}
+
+@media(max-width:600px) {
+    .container-premium,
+    .hero-content { width:calc(100% - 36px); }
+
+    .hero { min-height:500px; }
+
+    .intro,
+    .quiz-section,
+    .guide { padding:65px 0; }
+
+    .quiz-wrapper { padding:28px 20px; }
+
+    .options { grid-template-columns:1fr; }
+
+    .quiz-navigation { margin-top:28px; }
+
+    .quiz-button { padding:13px 17px; }
+
+    .guide-grid { grid-template-columns:1fr; }
+
+    .guide-card img { height:240px; }
+}
+</style>
+<link href="css/site-components.css" rel="stylesheet"/>
+</head>
+<body>
+<div data-site-header=""></div>
+<header class="hero">
+<img alt="Приготовление матча японским бамбуковым венчиком" src="https://images.unsplash.com/photo-1753009712810-3f72c3f72548?w=1800"/>
+<div class="hero-content">
+<span class="eyebrow">Персональный чайный гид</span>
+<h1 class="serif">
+            Чай,<br/>
+            который<br/>
+            подходит вам.
+        </h1>
+<p>
+            У каждого свой вкус и свои предпочтения.
+            Ответьте на несколько вопросов — и мы
+            подберём сорт, с которого стоит начать.
+        </p>
+</div>
+</header>
+<section class="intro">
+<div class="container-premium">
+<span class="eyebrow">Найдите свой вкус</span>
+<h2 class="serif">
+            Не нужно разбираться во всех сортах.
+            Начните с того, что нравится именно вам.
+        </h2>
+<p>
+            Наш небольшой гид поможет сориентироваться
+            в чайной коллекции. Это рекомендация по вашим
+            предпочтениям, а не строгая классификация вкусов.
+        </p>
+</div>
+</section>
+<section class="quiz-section" id="quiz">
+<div class="container-premium">
+<div class="quiz-wrapper">
+<div class="quiz-top">
+<span class="eyebrow">Ваш чайный профиль</span>
+<span class="quiz-step" id="stepLabel">ВОПРОС 1 ИЗ 4</span>
+</div>
+<div class="progress-track">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+<form id="teaQuiz">
+<!-- QUESTION 1 -->
+<div class="question active" data-step="0">
+<h2 class="serif">Какой вкус вам ближе?</h2>
+<p class="question-description">
+                        Выберите то, что обычно нравится вам в напитках.
+                    </p>
+<div class="options">
+<div class="option">
+<input id="taste1" name="taste" type="radio" value="fresh"/>
+<label for="taste1">
+<span>
+<span class="option-title">Свежий и лёгкий</span>
+<small>Травяные и деликатные ноты</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="taste2" name="taste" type="radio" value="rich"/>
+<label for="taste2">
+<span>
+<span class="option-title">Насыщенный и яркий</span>
+<small>Выразительный вкус и аромат</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="taste3" name="taste" type="radio" value="soft"/>
+<label for="taste3">
+<span>
+<span class="option-title">Мягкий и нежный</span>
+<small>Спокойный, округлый вкус</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="taste4" name="taste" type="radio" value="aromatic"/>
+<label for="taste4">
+<span>
+<span class="option-title">Ароматный и необычный</span>
+<small>Интересные сочетания и оттенки</small>
+</span>
+</label>
+</div>
+</div>
+</div>
+<!-- QUESTION 2 -->
+<div class="question" data-step="1">
+<h2 class="serif">Когда вы чаще пьёте чай?</h2>
+<p class="question-description">
+                        Подумайте о привычном моменте для чашки чая.
+                    </p>
+<div class="options">
+<div class="option">
+<input id="moment1" name="moment" type="radio" value="morning"/>
+<label for="moment1">
+<span>
+<span class="option-title">Утром</span>
+<small>Начать день с любимого напитка</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="moment2" name="moment" type="radio" value="day"/>
+<label for="moment2">
+<span>
+<span class="option-title">Днём</span>
+<small>Небольшая пауза в делах</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="moment3" name="moment" type="radio" value="evening"/>
+<label for="moment3">
+<span>
+<span class="option-title">Вечером</span>
+<small>Спокойный отдых после дня</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="moment4" name="moment" type="radio" value="any"/>
+<label for="moment4">
+<span>
+<span class="option-title">В любое время</span>
+<small>Чай — часть моего дня</small>
+</span>
+</label>
+</div>
+</div>
+</div>
+<!-- QUESTION 3 -->
+<div class="question" data-step="2">
+<h2 class="serif">Насколько крепкий чай вы любите?</h2>
+<p class="question-description">
+                        Здесь нет правильного ответа — только ваши предпочтения.
+                    </p>
+<div class="options">
+<div class="option">
+<input id="strength1" name="strength" type="radio" value="light"/>
+<label for="strength1">
+<span>
+<span class="option-title">Лёгкий</span>
+<small>Ненавязчивый и деликатный</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="strength2" name="strength" type="radio" value="medium"/>
+<label for="strength2">
+<span>
+<span class="option-title">Средний</span>
+<small>Сбалансированный вкус</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="strength3" name="strength" type="radio" value="strong"/>
+<label for="strength3">
+<span>
+<span class="option-title">Крепкий</span>
+<small>Насыщенный и выразительный</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="strength4" name="strength" type="radio" value="unknown"/>
+<label for="strength4">
+<span>
+<span class="option-title">Пока не знаю</span>
+<small>Хочу попробовать разное</small>
+</span>
+</label>
+</div>
+</div>
+</div>
+<!-- QUESTION 4 -->
+<div class="question" data-step="3">
+<h2 class="serif">Что вы хотели бы попробовать?</h2>
+<p class="question-description">
+                        Последний вопрос — и мы покажем вашу рекомендацию.
+                    </p>
+<div class="options">
+<div class="option">
+<input id="type1" name="type" type="radio" value="green"/>
+<label for="type1">
+<span>
+<span class="option-title">Зелёный чай</span>
+<small>Свежесть и природные ноты</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="type2" name="type" type="radio" value="black"/>
+<label for="type2">
+<span>
+<span class="option-title">Чёрный чай</span>
+<small>Глубина и насыщенность</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="type3" name="type" type="radio" value="herbal"/>
+<label for="type3">
+<span>
+<span class="option-title">Травяной напиток</span>
+<small>Ароматные травяные сочетания</small>
+</span>
+</label>
+</div>
+<div class="option">
+<input id="type4" name="type" type="radio" value="surprise"/>
+<label for="type4">
+<span>
+<span class="option-title">Удивите меня</span>
+<small>Открыт(а) к новым вкусам</small>
+</span>
+</label>
+</div>
+</div>
+</div>
+<div class="quiz-navigation">
+<button class="quiz-button secondary" disabled="" id="previousButton" type="button">
+                        Назад
+                    </button>
+<button class="quiz-button" id="nextButton" type="button">
+                        Далее ↗
+                    </button>
+</div>
+</form>
+<!-- RESULT -->
+<div class="result" id="result">
+<span class="eyebrow">Ваша рекомендация</span>
+<h2 class="serif" id="resultTitle"></h2>
+<img alt="Рекомендуемый чай" class="result-image" id="resultImage" src=""/>
+<p id="resultDescription"></p>
+<div class="result-price" id="resultPrice"></div>
+<div class="result-actions">
+<a href="product.html" id="resultDetails">
+                        Подробнее о чае
+                    </a>
+<button id="addResultToCart" type="button">
+                        Добавить в корзину
+                    </button>
+<button class="restart" id="restartButton" type="button">
+                        Пройти заново
+                    </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="guide">
+<div class="container-premium">
+<div class="guide-heading">
+<span class="eyebrow">Небольшой путеводитель</span>
+<h2 class="serif">Три направления чайного мира</h2>
+</div>
+<div class="guide-grid">
+<article class="guide-card">
+<img alt="Зелёный чай" src="https://images.unsplash.com/photo-1763617702099-d956f3fd8324?w=900"/>
+<h3 class="serif">Зелёный чай</h3>
+<p>
+                    Часто отличается свежими растительными,
+                    цветочными и травяными оттенками.
+                    Подойдёт тем, кто предпочитает более лёгкий профиль.
+                </p>
+</article>
+<article class="guide-card">
+<img alt="Чёрный чай" src="https://images.unsplash.com/photo-1759523710626-199a2da96085?w=900"/>
+<h3 class="serif">Чёрный чай</h3>
+<p>
+                    Более насыщенный профиль с разнообразными
+                    фруктовыми, медовыми и древесными оттенками.
+                </p>
+</article>
+<article class="guide-card">
+<img alt="Травяной чай" src="https://images.unsplash.com/photo-1648455321715-e8ed86188c0e?w=900"/>
+<h3 class="serif">Травяные сборы</h3>
+<p>
+                    Напитки на основе трав и растений.
+                    Многие из них не содержат чайного листа
+                    и естественного кофеина из него.
+                </p>
+</article>
+</div>
+</div>
+</section>
+<section class="final-cta">
+<div class="container-premium">
+<span class="eyebrow">Следующий шаг</span>
+<h2 class="serif">Нашли направление?</h2>
+<p>
+            Исследуйте чайную коллекцию и выберите
+            свой следующий любимый сорт.
+        </p>
+<a href="catalog.html">Открыть каталог ↗</a>
+</div>
+</section>
+<footer class="footer">
+<div class="container-premium">
+<div class="row g-5">
+<div class="col-lg-4">
+<div class="footer-title">ЧАЙНЫЙ КЛУБ</div>
+<p class="mt-3">
+                    Пространство чайной культуры,
+                    выразительных вкусов и особенных ритуалов.
+                </p>
+</div>
+<div class="col-6 col-lg-2">
+<h4>Магазин</h4>
+<a href="catalog.html">Каталог</a>
+<a href="favorites.html">Избранное</a>
+<a href="cart.html">Корзина</a>
+<a href="order.html">Заказ</a>
+</div>
+<div class="col-6 col-lg-3">
+<h4>Мир чая</h4>
+<a href="ceremony.html">Церемонии</a>
+<a href="tea-guide.html">Подбор чая</a>
+<a href="tea-history.html">История чая</a>
+<a href="reviews.html">Отзывы</a>
+</div>
+<div class="col-lg-3">
+<h4>Информация</h4>
+<a href="contacts.html">Контакты</a>
+<a href="index.html">Главная</a>
+</div>
+</div>
+<div class="footer-bottom">
+            © 2026 Чайный клуб · Искусство настоящего чая
+        </div>
+</div>
+</footer>
+<script>
+
+
+// QUIZ
+
+const questions = Array.from(document.querySelectorAll(".question"));
+const nextButton = document.getElementById("nextButton");
+const previousButton = document.getElementById("previousButton");
+const progressBar = document.getElementById("progressBar");
+const stepLabel = document.getElementById("stepLabel");
+const quizForm = document.getElementById("teaQuiz");
+
+let currentStep = 0;
+
+function showStep() {
+    questions.forEach((question,index) => {
+        question.classList.toggle("active",index === currentStep);
+    });
+
+    progressBar.style.width = ((currentStep + 1) / 4 * 100) + "%";
+    stepLabel.textContent = "ВОПРОС " + (currentStep + 1) + " ИЗ 4";
+
+    previousButton.disabled = currentStep === 0;
+
+    nextButton.textContent =
+        currentStep === 3 ? "Получить рекомендацию ↗" : "Далее ↗";
+}
+
+function getAnswer(name) {
+    const selected = document.querySelector(
+        'input[name="' + name + '"]:checked'
+    );
+
+    return selected ? selected.value : null;
+}
+
+nextButton.addEventListener("click", function() {
+    const questionNames = ["taste","moment","strength","type"];
+    const answer = getAnswer(questionNames[currentStep]);
+
+    if (!answer) {
+        alert("Пожалуйста, выберите один из вариантов.");
+        return;
+    }
+
+    if (currentStep < 3) {
+        currentStep++;
+        showStep();
+    } else {
+        showResult();
+    }
+});
+
+previousButton.addEventListener("click", function() {
+    if (currentStep > 0) {
+        currentStep--;
+        showStep();
+    }
+});
+
+
+// RECOMMENDATION
+
+const teaProducts = {
+    green: {
+        name:"Зелёный чай Сенча",
+        price:450,
+        image:"https://images.unsplash.com/photo-1763617702099-d956f3fd8324?w=900",
+        cartImage:"https://images.unsplash.com/photo-1763617702099-d956f3fd8324?w=700",
+        description:"Японский зелёный чай с мягким травяным вкусом и лёгкой свежестью. Хороший вариант для знакомства с зелёными сортами."
+    },
+
+    black: {
+        name:"Чёрный чай Ассам",
+        price:520,
+        image:"https://images.unsplash.com/photo-1759523710626-199a2da96085?w=900",
+        cartImage:"https://images.unsplash.com/photo-1759523710626-199a2da96085?w=700",
+        description:"Индийский чёрный чай с насыщенным вкусом и выразительным ароматом. Подойдёт любителям более ярких напитков."
+    },
+
+    herbal: {
+        name:"Травяной сбор",
+        price:390,
+        image:"https://images.unsplash.com/photo-1648455321715-e8ed86188c0e?w=900",
+        cartImage:"https://images.unsplash.com/photo-1648455321715-e8ed86188c0e?w=700",
+        description:"Ароматный травяной напиток с мягким вкусом. Вариант для тех, кто хочет попробовать что-то без чайного листа."
+    }
+};
+
+let recommendedTea = null;
+
+function showResult() {
+    const type = getAnswer("type");
+    const taste = getAnswer("taste");
+    const strength = getAnswer("strength");
+
+    let recommendation;
+
+    if (type !== "surprise") {
+        recommendation = type;
+    } else if (taste === "rich" || strength === "strong") {
+        recommendation = "black";
+    } else if (taste === "aromatic" || taste === "soft") {
+        recommendation = "herbal";
+    } else {
+        recommendation = "green";
+    }
+
+    recommendedTea = teaProducts[recommendation];
+
+    document.getElementById("resultTitle").textContent =
+        recommendedTea.name;
+
+    document.getElementById("resultImage").src =
+        recommendedTea.image;
+
+    document.getElementById("resultDescription").textContent =
+        recommendedTea.description;
+
+    document.getElementById("resultPrice").textContent =
+        recommendedTea.price + " ₽";
+
+    quizForm.style.display = "none";
+    document.querySelector(".quiz-top").style.display = "none";
+    document.querySelector(".progress-track").style.display = "none";
+
+    document.getElementById("result").style.display = "block";
+}
+
+document.getElementById("addResultToCart").addEventListener("click",function() {
+    if (!recommendedTea) return;
+
+    let cart = JSON.parse(localStorage.getItem("teaCart")) || [];
+
+    const existingItem = cart.find(item =>
+        item.name === recommendedTea.name
+    );
+
+    if (existingItem) {
+        existingItem.quantity++;
+    } else {
+        cart.push({
+            name:recommendedTea.name,
+            price:recommendedTea.price,
+            image:recommendedTea.cartImage,
+            quantity:1
+        });
+    }
+
+    localStorage.setItem("teaCart",JSON.stringify(cart));
+
+    alert("Рекомендованный чай добавлен в корзину!");
+});
+
+document.getElementById("restartButton").addEventListener("click",function() {
+    quizForm.reset();
+
+    currentStep = 0;
+    recommendedTea = null;
+
+    quizForm.style.display = "block";
+    document.querySelector(".quiz-top").style.display = "flex";
+    document.querySelector(".progress-track").style.display = "block";
+    document.getElementById("result").style.display = "none";
+
+    showStep();
+
+    document.getElementById("quiz").scrollIntoView({
+        behavior:"smooth"
+    });
+});
+
+showStep();
+</script>
+
+<script src="js/components.js"></script>
+</body>
+</html>

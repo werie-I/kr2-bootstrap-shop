@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="Форма бронирования места на чайной церемонии в Чайном клубе." name="description"/>
+<title>Бронирование чайной церемонии — Чайный клуб</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="css/site-components.css" rel="stylesheet"/>
+</head>
+<body class="booking-page">
+<div data-site-header=""></div>
+<main>
+<section class="booking-page__hero">
+<span class="booking-page__eyebrow">Ваша особенная встреча</span>
+<h1 class="booking-page__title">Забронируйте время для себя</h1>
+<p class="booking-page__intro">
+        Выберите формат церемонии, дату и количество гостей. Мы подготовим
+        пространство для знакомства с чайной культурой и неспешного отдыха.
+      </p>
+</section>
+<section aria-labelledby="booking-form-title" class="booking-page__layout">
+<aside class="booking-page__info">
+<span class="booking-page__eyebrow">Как проходит запись</span>
+<h2 class="booking-page__info-title">Несколько деталей — и вы ближе к чайному ритуалу.</h2>
+<p class="booking-page__info-text">
+          Укажите контактные данные, выберите желаемую церемонию и удобное время.
+          После заполнения формы вы увидите сводку выбранной церемонии.
+        </p>
+<div class="booking-page__notice">
+          Мы уточним детали выбранной церемонии и подтвердим удобное время отдельно.
+        </div>
+</aside>
+<form class="booking-form" id="bookingForm">
+<h2 class="booking-form__title" id="booking-form-title">Заявка на церемонию</h2>
+<div class="booking-form__field">
+<label class="booking-form__label" for="guestName">Ваше имя *</label>
+<input class="booking-form__control" id="guestName" maxlength="50" minlength="2" name="name" placeholder="Как к вам обращаться?" required="" type="text"/>
+</div>
+<div class="booking-form__field">
+<label class="booking-form__label" for="guestPhone">Номер телефона *</label>
+<input class="booking-form__control" id="guestPhone" name="phone" pattern="[+0-9()\s-]{7,20}" placeholder="+7 (___) ___-__-__" required="" title="Введите номер телефона, используя цифры и символы +, -, ( )" type="tel"/>
+</div>
+<div class="booking-form__field">
+<label class="booking-form__label" for="format">Формат церемонии *</label>
+<select class="booking-form__control" id="format" name="format" required="">
+<option value="">Выберите формат</option>
+<option value="Китайская церемония">Китайская церемония — 1 800 ₽ / гость</option>
+<option value="Японская церемония">Японская церемония — 2 200 ₽ / гость</option>
+<option value="Чайная дегустация">Чайная дегустация — 1 500 ₽ / гость</option>
+</select>
+</div>
+<div class="booking-form__grid">
+<div class="booking-form__field">
+<label class="booking-form__label" for="bookingDate">Дата *</label>
+<input class="booking-form__control" id="bookingDate" name="date" required="" type="date"/>
+</div>
+<div class="booking-form__field">
+<label class="booking-form__label" for="bookingTime">Время *</label>
+<select class="booking-form__control" id="bookingTime" name="time" required="">
+<option value="">Выберите время</option>
+<option>11:00</option><option>13:00</option><option>15:00</option>
+<option>17:00</option><option>19:00</option>
+</select>
+</div>
+</div>
+<div class="booking-form__field">
+<label class="booking-form__label" for="guestCount">Количество гостей *</label>
+<select class="booking-form__control" id="guestCount" name="guests" required="">
+<option value="1">1 гость</option><option selected="" value="2">2 гостя</option>
+<option value="3">3 гостя</option><option value="4">4 гостя</option>
+<option value="5">5 гостей</option><option value="6">6 гостей</option>
+</select>
+</div>
+<div class="booking-form__field">
+<label class="booking-form__label" for="bookingComment">Пожелания</label>
+<textarea class="booking-form__control" id="bookingComment" maxlength="500" name="comment" placeholder="Необязательный комментарий" rows="4"></textarea>
+</div>
+<label class="booking-form__consent">
+<input id="bookingConsent" required="" type="checkbox"/>
+<span>Я согласен(на) на обработку персональных данных для связи по заявке.</span>
+</label>
+<button class="booking-form__submit" type="submit">Отправить заявку ↗</button>
+<p class="booking-form__hint">Поля, отмеченные *, обязательны для заполнения. Отправка формы не подтверждает наличие свободного времени.</p>
+</form>
+</section>
+</main>
+<dialog aria-labelledby="bookingDialogTitle" class="booking-dialog" id="bookingDialog">
+<p class="booking-page__eyebrow">Чайная церемония</p>
+<h2 class="booking-dialog__title" id="bookingDialogTitle">Заявка сформирована</h2>
+<p class="booking-dialog__text" id="bookingDialogMessage"></p>
+<button class="booking-dialog__close" id="bookingDialogClose" type="button">Понятно</button>
+</dialog>
+
+<script>
+    const bookingForm = document.getElementById("bookingForm");
+    const bookingDate = document.getElementById("bookingDate");
+    const bookingDialog = document.getElementById("bookingDialog");
+    const bookingDialogMessage = document.getElementById("bookingDialogMessage");
+
+    const now = new Date();
+    const localDate = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+      .toISOString().slice(0, 10);
+    bookingDate.min = localDate;
+
+    const queryFormat = new URLSearchParams(window.location.search).get("format");
+    if (queryFormat) {
+      const matchingOption = Array.from(document.getElementById("format").options)
+        .find(option => option.value === queryFormat);
+      if (matchingOption) matchingOption.selected = true;
+    }
+
+    bookingForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+      if (!bookingForm.reportValidity()) return;
+
+      const formData = new FormData(bookingForm);
+      const date = new Date(formData.get("date") + "T12:00:00")
+        .toLocaleDateString("ru-RU");
+      bookingDialogMessage.textContent =
+        formData.get("name") + ", ваша заявка: " +
+        formData.get("format") + ", " + date + ", " +
+        formData.get("time") + ", гостей: " + formData.get("guests") +
+        ". Мы свяжемся с вами для подтверждения времени.";
+
+      bookingDialog.showModal();
+      bookingForm.reset();
+      bookingDate.min = localDate;
+    });
+
+    document.getElementById("bookingDialogClose").addEventListener("click", function() {
+      bookingDialog.close();
+    });
+  </script>
+<script src="js/components.js"></script>
+</body>
+</html>

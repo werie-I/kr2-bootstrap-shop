@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Отзывы — Чайный клуб</title>
+<meta content="Отзывы и впечатления о сортах чая и чайных церемониях." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<style>
+    :root {
+      --cream: #f5f2ea;
+      --dark: #303a2e;
+      --gold: #aa9162;
+      --text: #34372f;
+      --muted: #858477;
+      --white: #fffefa;
+      --line: #e5e0d5;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(1320px, 90%);
+      margin: auto;
+    }
+
+    header {
+      background: var(--cream);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .navbar {
+      min-height: 90px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 27px;
+      color: var(--dark);
+      white-space: nowrap;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+      font-size: 13px;
+      color: var(--dark);
+    }
+
+    .nav-links a {
+      transition: color .2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--gold);
+    }
+
+    .menu-button {
+      display: none;
+      border: 1px solid var(--dark);
+      background: transparent;
+      padding: 10px 15px;
+      color: var(--dark);
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .hero {
+      padding: 95px 0 65px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    h1, h2, h3 {
+      font-family: 'Playfair Display', serif;
+      font-weight: 400;
+      color: var(--dark);
+    }
+
+    h1 {
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1.1;
+      margin-bottom: 22px;
+    }
+
+    .hero p {
+      max-width: 590px;
+      margin: auto;
+      color: var(--muted);
+      line-height: 1.8;
+      font-size: 15px;
+    }
+
+    .rating-overview {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 60px;
+      align-items: center;
+      background: var(--dark);
+      color: white;
+      padding: 55px;
+      margin-bottom: 85px;
+    }
+
+    .rating-main {
+      text-align: center;
+      border-right: 1px solid rgba(255,255,255,.2);
+      padding-right: 35px;
+    }
+
+    .rating-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 75px;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+
+    .stars {
+      color: #d2b77e;
+      letter-spacing: 4px;
+      font-size: 20px;
+      margin-bottom: 12px;
+    }
+
+    .rating-main p,
+    .rating-bars p {
+      color: rgba(255,255,255,.65);
+      font-size: 13px;
+    }
+
+    .rating-bars {
+      display: grid;
+      gap: 15px;
+    }
+
+    .rating-row {
+      display: grid;
+      grid-template-columns: 35px 1fr 35px;
+      align-items: center;
+      gap: 15px;
+      font-size: 13px;
+    }
+
+    .bar {
+      height: 6px;
+      background: rgba(255,255,255,.15);
+      overflow: hidden;
+    }
+
+    .bar-fill {
+      height: 100%;
+      background: #d2b77e;
+    }
+
+    .reviews-section {
+      padding-bottom: 100px;
+    }
+
+    .section-heading {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+      margin-bottom: 35px;
+    }
+
+    .section-heading h2 {
+      font-size: 42px;
+    }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .filter-button {
+      border: 1px solid var(--line);
+      background: transparent;
+      padding: 11px 17px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 12px;
+      color: var(--text);
+      transition: .2s;
+    }
+
+    .filter-button:hover,
+    .filter-button.active {
+      background: var(--dark);
+      color: white;
+      border-color: var(--dark);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .review-card {
+      background: var(--white);
+      padding: 30px;
+      border: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+      min-height: 260px;
+    }
+
+    .review-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .review-stars {
+      color: var(--gold);
+      letter-spacing: 2px;
+    }
+
+    .review-date {
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .review-card h3 {
+      font-size: 23px;
+      margin-bottom: 7px;
+    }
+
+    .review-product {
+      color: var(--gold);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 17px;
+    }
+
+    .review-text {
+      color: #77776e;
+      font-size: 14px;
+      line-height: 1.8;
+      flex: 1;
+    }
+
+    .demo-note {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 20px;
+    }
+
+    .empty-message {
+      grid-column: 1 / -1;
+      padding: 50px;
+      text-align: center;
+      color: var(--muted);
+      background: var(--white);
+    }
+
+    .form-section {
+      background: #eae6dc;
+      padding: 85px 0;
+    }
+
+    .form-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: start;
+    }
+
+    .form-info h2 {
+      font-size: 48px;
+      margin-bottom: 20px;
+    }
+
+    .form-info p {
+      color: var(--muted);
+      line-height: 1.8;
+      max-width: 420px;
+    }
+
+    .review-form {
+      background: var(--white);
+      padding: 40px;
+    }
+
+    .form-group {
+      margin-bottom: 22px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      margin-bottom: 9px;
+      color: var(--dark);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid var(--line);
+      background: transparent;
+      font-family: inherit;
+      font-size: 13px;
+      color: var(--text);
+      outline: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .rating-select {
+      display: flex;
+      gap: 8px;
+      flex-direction: row-reverse;
+      justify-content: flex-end;
+    }
+
+    .rating-select input {
+      display: none;
+    }
+
+    .rating-select label {
+      font-size: 30px;
+      color: #d8d2c5;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .rating-select label:hover,
+    .rating-select label:hover ~ label,
+    .rating-select input:checked ~ label {
+      color: var(--gold);
+    }
+
+    .submit-button {
+      width: 100%;
+      padding: 17px;
+      border: none;
+      background: var(--dark);
+      color: white;
+      font-family: inherit;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: .2s;
+    }
+
+    .submit-button:hover {
+      background: #465342;
+    }
+
+    .success-message {
+      display: none;
+      padding: 15px;
+      margin-top: 18px;
+      background: #edf1e9;
+      color: #40543a;
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    footer {
+      background: var(--dark);
+      color: white;
+      padding: 55px 0 30px;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      gap: 40px;
+      padding-bottom: 40px;
+    }
+
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 30px;
+      margin-bottom: 12px;
+    }
+
+    .footer-description {
+      color: rgba(255,255,255,.6);
+      font-size: 13px;
+      max-width: 300px;
+      line-height: 1.7;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 22px;
+      font-size: 12px;
+      color: rgba(255,255,255,.75);
+      align-items: center;
+    }
+
+    .copyright {
+      border-top: 1px solid rgba(255,255,255,.15);
+      padding-top: 25px;
+      color: rgba(255,255,255,.5);
+      font-size: 11px;
+    }
+
+    @media (max-width: 1000px) {
+      .nav-links {
+        gap: 13px;
+        font-size: 11px;
+      }
+
+      .reviews-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .navbar {
+        flex-wrap: wrap;
+        padding: 20px 0;
+      }
+
+      .menu-button {
+        display: block;
+      }
+
+      .nav-links {
+        display: none;
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 18px;
+        padding: 20px 0;
+      }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .hero {
+        padding: 65px 0 45px;
+      }
+
+      .rating-overview,
+      .form-layout {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .rating-overview {
+        padding: 35px 25px;
+      }
+
+      .rating-main {
+        border-right: none;
+        border-bottom: 1px solid rgba(255,255,255,.2);
+        padding: 0 0 30px;
+      }
+
+      .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .reviews-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-section {
+        padding: 60px 0;
+      }
+
+      .review-form {
+        padding: 25px;
+      }
+
+      .footer-content {
+        flex-direction: column;
+      }
+    }
+  </style>
+<link href="css/site-components.css" rel="stylesheet"/>
+</head>
+<body>
+<div data-site-header=""></div>
+<header>
+</header>
+<main>
+<section class="hero container">
+<div class="eyebrow">Мнения наших гостей</div>
+<h1>Истории за чашкой чая</h1>
+<p>
+      Для нас чай — это не только вкус, но и впечатления.
+      Здесь собраны отзывы о наших сортах и чайных традициях.
+    </p>
+</section>
+<section class="container">
+<div class="rating-overview">
+<div class="rating-main">
+<div class="rating-number" id="averageRating">5.0</div>
+<div class="stars">★★★★★</div>
+<p id="reviewCount">Отзывов: 4</p>
+</div>
+<div class="rating-bars" id="ratingBars"></div>
+</div>
+</section>
+<section class="reviews-section container">
+<div class="section-heading">
+<div>
+<div class="eyebrow">Впечатления</div>
+<h2>Отзывы покупателей</h2>
+</div>
+<div class="filters">
+<button class="filter-button active" data-rating="all">Все</button>
+<button class="filter-button" data-rating="5">5 звёзд</button>
+<button class="filter-button" data-rating="4">4 звезды</button>
+<button class="filter-button" data-rating="3">3 звезды</button>
+</div>
+</div>
+<div class="reviews-grid" id="reviewsGrid"></div>
+</section>
+<section class="form-section">
+<div class="container form-layout">
+<div class="form-info">
+<div class="eyebrow">Поделитесь впечатлением</div>
+<h2>Ваше мнение важно</h2>
+<p>
+          Попробовали новый сорт или посетили чайную церемонию?
+          Расскажите о своих впечатлениях — ваш отзыв поможет другим
+          открыть для себя мир чая.
+        </p>
+</div>
+<form class="review-form" id="reviewForm">
+<div class="form-group">
+<label for="reviewName">Ваше имя</label>
+<input id="reviewName" maxlength="40" placeholder="Например, Анна" required="" type="text"/>
+</div>
+<div class="form-group">
+<label for="reviewProduct">О чём ваш отзыв?</label>
+<select id="reviewProduct" required="">
+<option value="">Выберите продукт</option>
+<option value="Зелёный чай Сенча">Зелёный чай Сенча</option>
+<option value="Чёрный чай Ассам">Чёрный чай Ассам</option>
+<option value="Травяной сбор">Травяной сбор</option>
+<option value="Чайная церемония">Чайная церемония</option>
+<option value="Чайный клуб">Чайный клуб</option>
+</select>
+</div>
+<div class="form-group">
+<label>Ваша оценка</label>
+<div class="rating-select">
+<input id="star5" name="rating" required="" type="radio" value="5"/>
+<label for="star5">★</label>
+<input id="star4" name="rating" type="radio" value="4"/>
+<label for="star4">★</label>
+<input id="star3" name="rating" type="radio" value="3"/>
+<label for="star3">★</label>
+<input id="star2" name="rating" type="radio" value="2"/>
+<label for="star2">★</label>
+<input id="star1" name="rating" type="radio" value="1"/>
+<label for="star1">★</label>
+</div>
+</div>
+<div class="form-group">
+<label for="reviewText">Ваш отзыв</label>
+<textarea id="reviewText" maxlength="600" minlength="10" placeholder="Расскажите о своих впечатлениях..." required=""></textarea>
+</div>
+<button class="submit-button" type="submit">Опубликовать отзыв</button>
+<div class="success-message" id="successMessage">
+          Спасибо! Ваш отзыв добавлен.
+        </div>
+</form>
+</div>
+</section>
+</main>
+<footer>
+<div class="container">
+<div class="footer-content">
+<div>
+<div class="footer-logo">Чайный клуб.</div>
+<p class="footer-description">
+          Искусство наслаждаться моментом.
+          Откройте для себя культуру настоящего чая.
+        </p>
+</div>
+<div class="footer-links">
+<a href="catalog.html">Каталог</a>
+<a href="ceremony.html">Церемонии</a>
+<a href="tea-guide.html">Подбор чая</a>
+<a href="reviews.html">Отзывы</a>
+<a href="contacts.html">Контакты</a>
+</div>
+</div>
+<div class="copyright">
+      © 2026 Чайный клуб. Учебный проект.
+    </div>
+</div>
+</footer>
+<script>
+
+  const defaultReviews = [
+    {
+      name: "Анна",
+      rating: 5,
+      product: "Зелёный чай Сенча",
+      text: "Очень приятный свежий вкус. Чай прекрасно подходит для спокойного утра. Обязательно попробую другие сорта.",
+      date: "2026-10-12"
+    },
+    {
+      name: "Екатерина",
+      rating: 5,
+      product: "Чайная церемония",
+      text: "Атмосфера невероятная. Получилось по-настоящему отвлечься от повседневных дел и насладиться моментом.",
+      date: "2026-10-08"
+    },
+    {
+      name: "Дмитрий",
+      rating: 4,
+      product: "Чёрный чай Ассам",
+      text: "Насыщенный вкус и приятный аромат. Хорошо сочетается с завтраком.",
+      date: "2026-10-03"
+    },
+    {
+      name: "Мария",
+      rating: 5,
+      product: "Травяной сбор",
+      text: "Мягкий аромат и интересное сочетание трав. Понравился особенно вечером.",
+      date: "2026-09-28"
+    }
+  ];
+
+  let userReviews = JSON.parse(localStorage.getItem("teaReviews") || "[]");
+  let currentFilter = "all";
+
+  function getAllReviews() {
+    return [...userReviews, ...defaultReviews];
+  }
+
+  function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, function(char) {
+      return {
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      }[char];
+    });
+  }
+
+  function formatDate(date) {
+    return new Date(date).toLocaleDateString("ru-RU", {
+      day: "numeric",
+      month: "long",
+      year: "numeric"
+    });
+  }
+
+  function renderReviews() {
+    const grid = document.getElementById("reviewsGrid");
+
+    const reviews = getAllReviews()
+      .filter(review => currentFilter === "all" || review.rating === Number(currentFilter))
+      .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    if (reviews.length === 0) {
+      grid.innerHTML = '<div class="empty-message">Пока нет отзывов с такой оценкой.</div>';
+      return;
+    }
+
+    grid.innerHTML = reviews.map(review => `
+      <article class="review-card">
+        <div class="review-top">
+          <div class="review-stars">${"★".repeat(review.rating)}${"☆".repeat(5 - review.rating)}</div>
+          <div class="review-date">${formatDate(review.date)}</div>
+        </div>
+
+        <h3>${escapeHTML(review.name)}</h3>
+        <div class="review-product">${escapeHTML(review.product)}</div>
+        <p class="review-text">${escapeHTML(review.text)}</p>
+      </article>
+    `).join("");
+  }
+
+  function renderRating() {
+    const reviews = getAllReviews();
+    const total = reviews.length;
+
+    const average = reviews.reduce((sum, review) => sum + review.rating, 0) / total;
+
+    document.getElementById("averageRating").textContent = average.toFixed(1);
+    document.getElementById("reviewCount").textContent =
+      "Отзывов: " + total;
+
+    const bars = document.getElementById("ratingBars");
+
+    bars.innerHTML = [5, 4, 3, 2, 1].map(rating => {
+      const count = reviews.filter(review => review.rating === rating).length;
+      const percentage = total ? count / total * 100 : 0;
+
+      return `
+        <div class="rating-row">
+          <span>${rating} ★</span>
+          <div class="bar">
+            <div class="bar-fill" style="width: ${percentage}%"></div>
+          </div>
+          <span>${count}</span>
+        </div>
+      `;
+    }).join("");
+  }
+
+  document.querySelectorAll(".filter-button").forEach(button => {
+    button.addEventListener("click", function() {
+      document.querySelectorAll(".filter-button").forEach(item => {
+        item.classList.remove("active");
+      });
+
+      this.classList.add("active");
+      currentFilter = this.dataset.rating;
+
+      renderReviews();
+    });
+  });
+
+  document.getElementById("reviewForm").addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    const selectedRating = document.querySelector('input[name="rating"]:checked');
+
+    if (!selectedRating) {
+      alert("Пожалуйста, выберите оценку.");
+      return;
+    }
+
+    const newReview = {
+      name: document.getElementById("reviewName").value.trim(),
+      product: document.getElementById("reviewProduct").value,
+      rating: Number(selectedRating.value),
+      text: document.getElementById("reviewText").value.trim(),
+      date: new Date().toISOString()
+    };
+
+    userReviews.unshift(newReview);
+
+    localStorage.setItem("teaReviews", JSON.stringify(userReviews));
+
+    this.reset();
+
+    currentFilter = "all";
+
+    document.querySelectorAll(".filter-button").forEach(button => {
+      button.classList.toggle("active", button.dataset.rating === "all");
+    });
+
+    renderReviews();
+    renderRating();
+
+    const successMessage = document.getElementById("successMessage");
+    successMessage.style.display = "block";
+
+    setTimeout(() => {
+      successMessage.style.display = "none";
+    }, 4000);
+  });
+
+  renderReviews();
+  renderRating();
+</script>
+
+<script src="js/components.js"></script>
+</body>
+</html>

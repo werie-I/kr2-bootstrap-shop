@@ -1,213 +1,1172 @@
 
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Чайный клуб — пространство чайной культуры, дегустаций и уютных встреч.">
-    <title>Чайный клуб — пространство чайной культуры</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ЧАЙНЫЙ КЛУБ — искусство настоящего чая</title>
+<meta content="Главная страница Чайного клуба: культура чая, популярные сорта и знакомство с коллекцией." name="description"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&amp;family=Playfair+Display:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+<style>
+        :root {
+            --ink: #242b22;
+            --olive: #485442;
+            --olive-dark: #303a2e;
+            --cream: #f5f2ea;
+            --paper: #ebe7dc;
+            --muted: #77786e;
+            --gold: #aa9162;
+            --line: rgba(36,43,34,.17);
+        }
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        * {
+            box-sizing: border-box;
+        }
 
-    <!-- Собственные стили -->
-    <link rel="stylesheet" href="css/custom.css">
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--cream);
+            color: var(--ink);
+            font-family: "DM Sans", sans-serif;
+            font-weight: 400;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        .container-premium {
+            width: min(1320px, calc(100% - 100px));
+            margin: auto;
+        }
+
+        .eyebrow {
+            font-size: 10px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700;
+        }
+
+        .serif {
+            font-family: "Playfair Display", Georgia, serif;
+            font-weight: 400;
+        }
+
+        /* NAVIGATION */
+
+        .premium-nav {
+            position: relative;
+            z-index: 100;
+            background: var(--cream);
+            border-bottom: 1px solid var(--line);
+        }
+
+        .nav-inner {
+            min-height: 82px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .brand {
+            font-size: 18px;
+            letter-spacing: 4px;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+
+        .brand small {
+            display: block;
+            font-size: 8px;
+            font-weight: 500;
+            letter-spacing: 3px;
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 26px;
+            font-size: 12px;
+        }
+
+        .nav-links a {
+            transition: color .2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold);
+        }
+
+        .nav-actions {
+            display: flex;
+            gap: 18px;
+            align-items: center;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .nav-menu-btn {
+            display: none;
+            background: none;
+            border: 1px solid var(--line);
+            padding: 9px 13px;
+            font-size: 12px;
+        }
+
+        /* HERO */
+
+        .hero {
+            min-height: 700px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            background: #323c30;
+            color: white;
+        }
+
+        .hero-image {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 55%;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                90deg,
+                rgba(22,29,22,.88) 0%,
+                rgba(22,29,22,.65) 42%,
+                rgba(22,29,22,.08) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: min(1320px, calc(100% - 100px));
+            margin: auto;
+            padding: 90px 0;
+        }
+
+        .hero .eyebrow {
+            color: #d0bc91;
+        }
+
+        .hero h1 {
+            max-width: 760px;
+            font-size: clamp(52px, 7vw, 100px);
+            line-height: 1.04;
+            margin: 32px 0 24px;
+            letter-spacing: -2px;
+        }
+
+        .hero-description {
+            max-width: 420px;
+            color: rgba(255,255,255,.78);
+            line-height: 1.9;
+            font-size: 14px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 38px;
+            flex-wrap: wrap;
+        }
+
+        .button-light {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 27px;
+            background: var(--cream);
+            color: var(--ink);
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: .25s;
+        }
+
+        .button-light:hover {
+            background: white;
+            transform: translateY(-2px);
+        }
+
+        .button-outline-light {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 26px;
+            border: 1px solid rgba(255,255,255,.55);
+            color: white;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: .25s;
+        }
+
+        .button-outline-light:hover {
+            background: white;
+            color: var(--ink);
+        }
+
+        .hero-note {
+            position: absolute;
+            right: 50px;
+            bottom: 36px;
+            z-index: 2;
+            font-size: 9px;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,.75);
+            text-transform: uppercase;
+        }
+
+        /* INTRO */
+
+        .intro {
+            padding: 110px 0 105px;
+            text-align: center;
+        }
+
+        .intro h2 {
+            max-width: 850px;
+            margin: 25px auto;
+            font-size: clamp(34px, 5vw, 62px);
+            line-height: 1.2;
+        }
+
+        .intro p {
+            max-width: 590px;
+            margin: auto;
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 2;
+        }
+
+        /* COLLECTION */
+
+        .collection {
+            padding: 90px 0 110px;
+            background: #ebe8de;
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 25px;
+            margin-bottom: 42px;
+        }
+
+        .section-heading h2 {
+            font-size: clamp(35px, 4vw, 55px);
+            margin: 14px 0 0;
+        }
+
+        .minimal-link {
+            border-bottom: 1px solid var(--ink);
+            padding-bottom: 6px;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            background: #ddd8ca;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 390px;
+            object-fit: cover;
+            transition: transform .6s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.045);
+        }
+
+        .product-tag {
+            position: absolute;
+            top: 18px;
+            left: 18px;
+            padding: 8px 11px;
+            background: var(--cream);
+            color: var(--ink);
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .product-info {
+            padding: 21px 0;
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: start;
+        }
+
+        .product-info h3 {
+            font-size: 17px;
+            font-weight: 500;
+            margin: 0 0 7px;
+        }
+
+        .product-info p {
+            font-size: 11px;
+            color: var(--muted);
+            margin: 0;
+        }
+
+        .product-price {
+            font-size: 13px;
+            white-space: nowrap;
+            font-weight: 600;
+        }
+
+        .product-details {
+            display: inline-block;
+            margin-top: 13px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px solid var(--gold);
+            padding-bottom: 4px;
+        }
+
+        /* BRAND STORY */
+
+        .story {
+            padding: 120px 0;
+            background: var(--olive-dark);
+            color: white;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1.05fr .95fr;
+            gap: 85px;
+            align-items: center;
+        }
+
+        .story-image {
+            width: 100%;
+            height: 580px;
+            object-fit: cover;
+        }
+
+        .story h2 {
+            font-size: clamp(40px, 5vw, 67px);
+            line-height: 1.15;
+            margin: 24px 0;
+        }
+
+        .story p {
+            color: rgba(255,255,255,.68);
+            font-size: 13px;
+            line-height: 2;
+            max-width: 430px;
+        }
+
+        .story .minimal-link {
+            display: inline-block;
+            margin-top: 25px;
+            border-color: rgba(255,255,255,.6);
+        }
+
+        .story .eyebrow {
+            color: #d0bc91;
+        }
+
+        /* EXPERIENCE */
+
+        .experience {
+            padding: 110px 0;
+        }
+
+        .experience-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #e9e5da;
+        }
+
+        .experience-image {
+            min-height: 510px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .experience-content {
+            padding: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .experience-content h2 {
+            font-size: clamp(36px, 4vw, 56px);
+            line-height: 1.2;
+            margin: 22px 0;
+        }
+
+        .experience-content p {
+            color: var(--muted);
+            font-size: 13px;
+            line-height: 2;
+            max-width: 400px;
+        }
+
+        .button-dark {
+            background: var(--olive-dark);
+            color: white;
+            padding: 16px 25px;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 20px;
+            transition: .2s;
+        }
+
+        .button-dark:hover {
+            background: var(--gold);
+            color: white;
+        }
+
+        /* DISCOVER */
+
+        .discover {
+            padding: 100px 0;
+            background: #ebe8de;
+        }
+
+        .discover-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .discover-card {
+            position: relative;
+            min-height: 390px;
+            overflow: hidden;
+            background: var(--olive-dark);
+            color: white;
+        }
+
+        .discover-card img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            inset: 0;
+            object-fit: cover;
+            transition: transform .6s;
+        }
+
+        .discover-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .discover-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                0deg,
+                rgba(21,29,21,.9),
+                rgba(21,29,21,.04) 85%
+            );
+        }
+
+        .discover-content {
+            position: absolute;
+            z-index: 2;
+            bottom: 28px;
+            left: 28px;
+            right: 28px;
+        }
+
+        .discover-content .eyebrow {
+            color: #d0bc91;
+        }
+
+        .discover-content h3 {
+            font-size: 29px;
+            margin: 13px 0;
+        }
+
+        .discover-content p {
+            font-size: 12px;
+            line-height: 1.7;
+            color: rgba(255,255,255,.75);
+        }
+
+        .discover-content a {
+            display: inline-block;
+            margin-top: 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid rgba(255,255,255,.7);
+            font-size: 10px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* REVIEWS */
+
+        .reviews {
+            padding: 110px 0;
+        }
+
+        .review-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+
+        .review-card {
+            padding: 32px;
+            border: 1px solid var(--line);
+            background: transparent;
+        }
+
+        .review-stars {
+            color: var(--gold);
+            letter-spacing: 3px;
+            font-size: 13px;
+        }
+
+        .review-card blockquote {
+            font-family: "Playfair Display", Georgia, serif;
+            font-size: 19px;
+            line-height: 1.65;
+            margin: 24px 0 30px;
+        }
+
+        .review-card .review-name {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .review-card .review-product {
+            font-size: 10px;
+            color: var(--muted);
+            margin-top: 6px;
+        }
+
+        /* FINAL CTA */
+
+        .final-cta {
+            position: relative;
+            padding: 110px 20px;
+            text-align: center;
+            color: white;
+            background:
+                linear-gradient(rgba(28,39,29,.75),rgba(28,39,29,.75)),
+                url("https://images.unsplash.com/photo-1687178888460-5dcbcd5c8c18?w=1600")
+                center/cover;
+        }
+
+        .final-cta h2 {
+            font-size: clamp(42px, 5vw, 65px);
+            margin: 22px 0;
+        }
+
+        .final-cta p {
+            color: rgba(255,255,255,.75);
+            font-size: 13px;
+        }
+
+        /* FOOTER */
+
+        .footer {
+            padding: 65px 0 25px;
+            background: #20291f;
+            color: white;
+        }
+
+        .footer-brand {
+            font-size: 19px;
+            letter-spacing: 4px;
+            font-weight: 700;
+        }
+
+        .footer-description {
+            max-width: 280px;
+            color: rgba(255,255,255,.5);
+            font-size: 12px;
+            line-height: 1.9;
+            margin-top: 18px;
+        }
+
+        .footer h4 {
+            font-size: 10px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #c1ad85;
+            margin-bottom: 22px;
+        }
+
+        .footer-links a {
+            display: block;
+            font-size: 11px;
+            color: rgba(255,255,255,.65);
+            margin-bottom: 13px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,.13);
+            margin-top: 50px;
+            padding-top: 22px;
+            color: rgba(255,255,255,.45);
+            font-size: 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* MOBILE */
+
+        @media (max-width: 1050px) {
+            .nav-links {
+                gap: 14px;
+            }
+
+            .nav-links a {
+                font-size: 10px;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .experience-content {
+                padding: 40px;
+            }
+        }
+
+        @media (max-width: 850px) {
+            .container-premium,
+            .hero-content {
+                width: calc(100% - 40px);
+            }
+
+            .nav-inner {
+                flex-wrap: wrap;
+                padding: 18px 0;
+            }
+
+            .nav-menu-btn {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0;
+                padding: 12px 0;
+                border-top: 1px solid var(--line);
+            }
+
+            .nav-links.open {
+                display: flex;
+            }
+
+            .nav-links a {
+                display: block;
+                padding: 10px 0;
+                font-size: 12px;
+            }
+
+            .product-grid,
+            .discover-grid,
+            .review-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .story-grid,
+            .experience-grid {
+                grid-template-columns: 1fr;
+                gap: 35px;
+            }
+
+            .story-image {
+                height: 420px;
+            }
+
+            .experience-image {
+                min-height: 350px;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .hero {
+                min-height: 650px;
+            }
+
+            .hero h1 {
+                font-size: 54px;
+            }
+
+            .hero-note {
+                right: 20px;
+                font-size: 8px;
+            }
+
+            .intro,
+            .collection,
+            .story,
+            .experience,
+            .discover,
+            .reviews {
+                padding: 70px 0;
+            }
+
+            .product-grid,
+            .discover-grid,
+            .review-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .product-image img {
+                height: 320px;
+            }
+
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .experience-content {
+                padding: 35px 25px;
+            }
+
+            .story-image {
+                height: 330px;
+            }
+
+            .final-cta {
+                padding: 80px 20px;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+            }
+        }
+    </style>
+<link href="css/site-components.css" rel="stylesheet"/>
 </head>
 <body>
+<div data-site-header=""></div>
+<!-- NAVIGATION -->
+<!-- INTERACTIVE HERO -->
+<section aria-labelledby="tea-hero-title" class="tea-hero">
+<img alt="" aria-hidden="true" class="tea-hero__backdrop" src="https://images.unsplash.com/photo-1687178888460-5dcbcd5c8c18?w=1800"/>
+<div class="tea-hero__inner">
+<div class="tea-hero__copy">
+<span class="tea-hero__eyebrow">Чайный клуб · искусство паузы</span>
+<h1 class="tea-hero__title" id="tea-hero-title">Пусть момент<br/><em>наполнится чаем.</em></h1>
+<p class="tea-hero__description">Откройте для себя чайные традиции, редкие сорта и маленькие ритуалы, которые возвращают ощущение спокойствия.</p>
+<div class="tea-hero__actions">
+<a class="tea-hero__primary" href="booking.html">Забронировать ↗</a>
+<a class="tea-hero__secondary" href="catalog.html">Исследовать коллекцию</a>
+</div>
+</div>
+<div class="tea-pour-scene" data-pour-scene="">
+<div aria-hidden="true" class="tea-pour-scene__halo"></div>
+<svg aria-labelledby="pour-title pour-desc" class="tea-pour-scene__svg" role="img" viewbox="0 0 520 460">
+<title id="pour-title">Чайник наливает чай в прозрачную чашку</title>
+<desc id="pour-desc">Нажмите на чашку, чтобы увидеть, как она наполняется янтарным чаем.</desc>
+<defs>
+<lineargradient id="glassBody" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity=".28"></stop><stop offset=".48" stop-color="#e9eee5" stop-opacity=".08"></stop><stop offset="1" stop-color="#fff" stop-opacity=".2"></stop></lineargradient>
+<lineargradient id="teaAmber" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#e7b96d"></stop><stop offset="1" stop-color="#9a5929"></stop></lineargradient>
+<lineargradient id="potGlass" x1="0" x2="1"><stop offset="0" stop-color="#f7f4e9" stop-opacity=".32"></stop><stop offset=".55" stop-color="#fff" stop-opacity=".08"></stop><stop offset="1" stop-color="#f7f4e9" stop-opacity=".25"></stop></lineargradient>
+<clippath id="cupClip"><path d="M235 284 Q238 382 272 393 Q313 406 347 393 Q379 381 382 284 Z"></path></clippath>
+</defs>
+<!-- Glass teapot -->
+<path d="M105 82 Q77 65 69 104 Q62 141 100 155" fill="none" stroke="#e8e5d8" stroke-linecap="round" stroke-opacity=".65" stroke-width="12"></path>
+<path d="M169 93 Q196 64 225 91 L251 133 Q267 156 245 181 L211 205" fill="none" stroke="#e8e5d8" stroke-linecap="round" stroke-opacity=".7" stroke-width="13"></path>
+<path d="M114 88 Q174 59 226 97 Q260 125 235 184 Q211 231 151 224 Q91 216 84 159 Q78 111 114 88Z" fill="url(#potGlass)" stroke="#f2ead8" stroke-opacity=".76" stroke-width="3"></path>
+<path d="M108 150 Q157 174 238 145" fill="none" stroke="#e9bd76" stroke-opacity=".45" stroke-width="3"></path>
+<path d="M139 82 Q162 68 189 80" fill="none" stroke="#f5efdf" stroke-linecap="round" stroke-opacity=".65" stroke-width="3"></path>
+<path d="M245 173 Q268 183 277 210" fill="none" stroke="#f5efdf" stroke-linecap="round" stroke-opacity=".75" stroke-width="3"></path>
+<!-- Pouring stream -->
+<path class="tea-pour-scene__stream" d="M264 205 C278 231 287 253 300 291"></path>
+<!-- Cup -->
+<g class="tea-pour-scene__cup" tabindex="0" role="button" aria-label="Налить чай">
+<path d="M374 306 Q424 288 428 325 Q431 359 381 359" fill="none" stroke="#f1ecdf" stroke-opacity=".7" stroke-width="9"></path>
+<path d="M235 284 Q238 382 272 393 Q313 406 347 393 Q379 381 382 284" fill="url(#glassBody)" stroke="#f3efe3" stroke-opacity=".82" stroke-width="3"></path>
+<g clip-path="url(#cupClip)">
+<g class="tea-pour-scene__liquid">
+<path d="M225 325 Q305 313 392 325 L392 410 L225 410Z" fill="url(#teaAmber)" opacity=".95"></path>
+<path d="M225 325 Q305 313 392 325" fill="none" opacity=".8" stroke="#f5d79c" stroke-width="3"></path>
+</g>
+</g>
+<path d="M250 300 Q260 375 281 383" fill="none" stroke="#fff" stroke-linecap="round" stroke-opacity=".48" stroke-width="4"></path>
+</g>
+<path class="tea-pour-scene__steam" d="M284 270 Q267 246 285 228 Q301 210 286 193"></path>
+<path class="tea-pour-scene__steam" d="M324 268 Q343 245 327 225 Q315 207 333 188" style="animation-delay:.6s"></path>
+<ellipse cx="306" cy="406" fill="#0e160f" opacity=".2" rx="95" ry="9"></ellipse>
 
-    <!-- Шапка сайта -->
-    <header class="site-header">
-        <nav class="navbar navbar-expand-lg">
-            <div class="container">
-                <a class="navbar-brand" href="index.html">ЧАЙНЫЙ КЛУБ</a>
-
-                <button class="navbar-toggler" type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#mainNavigation"
-                        aria-controls="mainNavigation"
-                        aria-expanded="false"
-                        aria-label="Открыть меню">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="mainNavigation">
-                    <ul class="navbar-nav ms-auto">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="index.html">Главная</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="product.html">Чайная карта</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="events.html">Мероприятия</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="about.html">О клубе</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-
-    <main>
-        <!-- Главный экран -->
-        <section class="hero-section">
-            <div class="container">
-                <div class="row align-items-center g-4">
-                    <div class="col-12 col-lg-6">
-                        <p class="hero-label">ПРОСТРАНСТВО ЧАЙНОЙ КУЛЬТУРЫ</p>
-                        <h1>Откройте искусство настоящего чая</h1>
-                        <p class="hero-description">
-                            Знакомьтесь с редкими сортами, открывайте новые вкусы
-                            и проводите время в атмосфере спокойствия.
-                        </p>
-                        <a href="events.html" class="btn btn-tea">
-                            Выбрать мероприятие
+</svg>
+<button class="tea-hero__pour-button" type="button" data-pour-trigger>Налить чай</button>
+</div>
+</div>
+</section>
+<!-- INTRO -->
+<section class="intro">
+<div class="container-premium">
+<span class="eyebrow">Философия чайного клуба</span>
+<h2 class="serif">
+            Иногда достаточно одной чашки,
+            чтобы мир вокруг стал немного тише.
+        </h2>
+<p>
+            Мы верим в красоту простых ритуалов.
+            В аромат свежезаваренного листа, в неспешные разговоры
+            и в удовольствие открывать новые оттенки знакомого вкуса.
+        </p>
+</div>
+</section>
+<!-- INTERACTIVE TEA TIMER -->
+<section aria-labelledby="tea-timer-title" class="tea-timer-section">
+<div class="tea-timer" data-tea-timer="">
+<div class="tea-timer__intro">
+<span class="tea-timer__eyebrow">Маленький чайный ритуал</span>
+<h2 class="tea-timer__title" id="tea-timer-title">Время раскрыть вкус.</h2>
+<p class="tea-timer__description">У каждого сорта свой характер и своё время. Выберите чай — таймер подскажет, когда настой будет готов.</p>
+</div>
+<div class="tea-timer__controls">
+<label class="tea-timer__label" for="teaTimerChoice">Что завариваем сегодня?</label>
+<select class="tea-timer__select" data-tea-choice="" id="teaTimerChoice">
+<option value="sencha">Сенча — зелёный чай</option>
+<option value="black">Чёрный чай</option>
+<option value="white">Белый чай</option>
+<option value="oolong">Улун</option>
+</select>
+<div class="tea-timer__meta"><span>Рекомендуемая температура</span><strong class="tea-timer__temperature" data-tea-temperature="">80°C</strong></div>
+<output aria-live="off" class="tea-timer__display" data-timer-display="">02:00</output>
+<div class="tea-timer__buttons">
+<button class="tea-timer__start" data-timer-start="" type="button">Начать заваривание</button>
+<button class="tea-timer__reset" data-timer-reset="" type="button">Сбросить</button>
+</div>
+<p aria-live="polite" class="tea-timer__message" data-timer-message="">Выберите сорт и нажмите «Начать заваривание».</p>
+</div>
+</div>
+</section>
+<!-- COLLECTION -->
+<section class="collection">
+<div class="container-premium">
+<div class="section-heading">
+<div>
+<span class="eyebrow">Выбор клуба</span>
+<h2 class="serif">Избранная коллекция</h2>
+</div>
+<a class="minimal-link" href="catalog.html">
+                Вся коллекция ↗
+            </a>
+</div>
+<div class="product-grid">
+<article class="product-card">
+<a class="product-image" href="product.html">
+<img alt="Зелёный чай Сенча" src="https://images.unsplash.com/photo-1763617702099-d956f3fd8324?w=900"/>
+<span class="product-tag">01 / Япония</span>
+</a>
+<div class="product-info">
+<div>
+<h3>Зелёный чай Сенча</h3>
+<p>Свежий, травяной, деликатный</p>
+<a class="product-details" href="product.html">
+                            Подробнее
                         </a>
-                    </div>
-
-                    <div class="col-12 col-lg-6">
-                        <img
-                            src="https://images.unsplash.com/photo-1544787219-7f47ccb76574?auto=format&fit=crop&w=1000&q=85"
-                            class="img-fluid hero-image"
-                            alt="Чайная церемония с чашкой чая">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Преимущества клуба -->
-        <section class="advantages-section section-padding">
-            <div class="container">
-                <div class="section-heading text-center">
-                    <p class="section-label">ПОЧЕМУ МЫ</p>
-                    <h2>Больше, чем просто чай</h2>
-                </div>
-
-                <div class="row g-4 mt-3">
-                    <div class="col-12 col-md-4">
-                        <article class="advantage-card h-100">
-                            <div class="advantage-icon">🍃</div>
-                            <h3>Культура чая</h3>
-                            <p>Изучаем традиции, сорта и способы заваривания чая.</p>
-                        </article>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <article class="advantage-card h-100">
-                            <div class="advantage-icon">🫖</div>
-                            <h3>Чайные церемонии</h3>
-                            <p>Знакомимся с чайными традициями и наслаждаемся вкусом.</p>
-                        </article>
-                    </div>
-
-                    <div class="col-12 col-md-4">
-                        <article class="advantage-card h-100">
-                            <div class="advantage-icon">🤎</div>
-                            <h3>Тёплое общение</h3>
-                            <p>Встречаем единомышленников и делимся впечатлениями.</p>
-                        </article>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Популярные сорта чая -->
-        <section class="tea-section section-padding">
-            <div class="container">
-                <div class="section-heading">
-                    <p class="section-label">ЗНАКОМСТВО СО ВКУСОМ</p>
-                    <h2>Популярные сорта чая</h2>
-                </div>
-
-                <div class="row g-4 mt-2">
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <article class="tea-card h-100">
-                            <img
-                                src="https://images.unsplash.com/photo-1556679343-c7306c1976bc?auto=format&fit=crop&w=800&q=85"
-                                class="card-img-top"
-                                alt="Зелёный чай">
-                            <div class="tea-card-body">
-                                <h3>Зелёный чай</h3>
-                                <p>Свежий вкус и тонкий травяной аромат.</p>
-                                <a href="product.html" class="text-link">Узнать больше →</a>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <article class="tea-card h-100">
-                            <img
-                                src="https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=800&q=85"
-                                class="card-img-top"
-                                alt="Чай в чайной посуде">
-                            <div class="tea-card-body">
-                                <h3>Чёрный чай</h3>
-                                <p>Насыщенный вкус и глубокий аромат.</p>
-                                <a href="product.html" class="text-link">Узнать больше →</a>
-                            </div>
-                        </article>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <article class="tea-card h-100">
-                            <img
-                                src="https://images.unsplash.com/photo-1563911892437-1feda0179e1b?auto=format&fit=crop&w=800&q=85"
-                                class="card-img-top"
-                                alt="Чайная посуда и чай">
-                            <div class="tea-card-body">
-                                <h3>Улун</h3>
-                                <p>Многогранный вкус между свежестью и насыщенностью.</p>
-                                <a href="product.html" class="text-link">Узнать больше →</a>
-                            </div>
-                        </article>
-                    </div>
-                </div>
-
-                <div class="text-center mt-4">
-                    <a href="product.html" class="btn btn-outline-tea">
-                        Вся чайная карта
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Приглашение на мероприятие -->
-        <section class="invitation-section">
-            <div class="container">
-                <div class="row align-items-center g-4">
-                    <div class="col-12 col-lg-8">
-                        <p class="section-label">ВАША ЧАШКА ВАС ЖДЁТ</p>
-                        <h2>Найдите свой любимый чай</h2>
-                        <p>Приходите на дегустации и открывайте новые вкусы вместе с нами.</p>
-                    </div>
-                    <div class="col-12 col-lg-4 text-lg-end">
-                        <a href="events.html" class="btn btn-light">
-                            Ближайшие мероприятия
+</div>
+<span class="product-price">450 ₽</span>
+</div>
+</article>
+<article class="product-card">
+<a class="product-image" href="catalog.html">
+<img alt="Чёрный чай Ассам" src="https://images.unsplash.com/photo-1759523710626-199a2da96085?w=900"/>
+<span class="product-tag">02 / Индия</span>
+</a>
+<div class="product-info">
+<div>
+<h3>Чёрный чай Ассам</h3>
+<p>Глубокий, насыщенный, яркий</p>
+<a class="product-details" href="catalog.html">
+                            Подробнее
                         </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
+</div>
+<span class="product-price">520 ₽</span>
+</div>
+</article>
+<article class="product-card">
+<a class="product-image" href="catalog.html">
+<img alt="Травяной сбор" src="https://images.unsplash.com/photo-1648455321715-e8ed86188c0e?w=900"/>
+<span class="product-tag">03 / Коллекция</span>
+</a>
+<div class="product-info">
+<div>
+<h3>Травяной сбор</h3>
+<p>Нежный, ароматный, природный</p>
+<a class="product-details" href="catalog.html">
+                            Подробнее
+                        </a>
+</div>
+<span class="product-price">390 ₽</span>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- BRAND STORY -->
+<section class="story">
+<div class="container-premium">
+<div class="story-grid">
+<div>
+<img alt="Чайная композиция" class="story-image" src="https://images.unsplash.com/photo-1647894111500-4ea0cea3bfe6?w=1000"/>
+</div>
+<div>
+<span class="eyebrow">Больше, чем напиток</span>
+<h2 class="serif">
+                    Культура,<br/>
+                    которую<br/>
+                    можно почувствовать.
+                </h2>
+<p>
+                    У каждого сорта своя история.
+                    За каждым ароматом стоят традиции,
+                    места и люди, которые бережно сохраняют
+                    искусство выращивания и приготовления чая.
+                </p>
+<p>
+                    Познакомьтесь с чайными традициями
+                    разных стран и найдите то, что близко именно вам.
+                </p>
+<a class="minimal-link" href="tea-history.html">
+                    Путешествие в историю чая ↗
+                </a>
+</div>
+</div>
+</div>
+</section>
+<!-- TEA CEREMONY -->
+<section class="experience">
+<div class="container-premium">
+<div class="experience-grid">
+<div>
+<img alt="Чайная церемония" class="experience-image" src="https://images.unsplash.com/photo-1648489350008-4e77e9c675d0?w=1100"/>
+</div>
+<div class="experience-content">
+<span class="eyebrow">Особенный ритуал</span>
+<h2 class="serif">
+                    Время,<br/>
+                    посвящённое себе.
+                </h2>
+<p>
+                    Позвольте себе замедлиться.
+                    Откройте мир чайных церемоний,
+                    познакомьтесь с традициями и
+                    проведите время в особенной атмосфере.
+                </p>
+<a class="button-dark" href="ceremony.html">
+                    Забронировать ↗
+                </a>
+</div>
+</div>
+</div>
+</section>
+<!-- DISCOVER -->
+<section class="discover">
+<div class="container-premium">
+<div class="section-heading">
+<div>
+<span class="eyebrow">Исследуйте</span>
+<h2 class="serif">Ваш путь в мир чая</h2>
+</div>
+</div>
+<div class="discover-grid">
+<article class="discover-card">
+<img alt="Подбор чая" src="https://images.unsplash.com/photo-1754557178022-a6333073ac07?w=800"/>
+<div class="discover-content">
+<span class="eyebrow">Персональный выбор</span>
+<h3 class="serif">Найдите свой вкус</h3>
+<p>
+                        Небольшое путешествие по вашим
+                        вкусовым предпочтениям.
+                    </p>
+<a href="tea-guide.html">Подобрать чай ↗</a>
+</div>
+</article>
+<article class="discover-card">
+<img alt="История чая" src="https://images.unsplash.com/photo-1648489350008-4e77e9c675d0?w=800"/>
+<div class="discover-content">
+<span class="eyebrow">Традиции и культура</span>
+<h3 class="serif">История в каждой чашке</h3>
+<p>
+                        Узнайте, как чай стал частью
+                        культуры разных стран.
+                    </p>
+<a href="tea-history.html">Исследовать ↗</a>
+</div>
+</article>
+<article class="discover-card">
+<img alt="Отзывы покупателей" src="https://images.unsplash.com/photo-1758272256506-b52fac1d17ac?w=800"/>
+<div class="discover-content">
+<span class="eyebrow">Впечатления</span>
+<h3 class="serif">Слова наших гостей</h3>
+<p>
+                        Прочитайте впечатления других
+                        любителей чая.
+                    </p>
+<a href="reviews.html">Читать отзывы ↗</a>
+</div>
+</article>
+</div>
+</div>
+</section>
+<!-- REVIEWS -->
+<section class="reviews">
+<div class="container-premium">
+<div class="section-heading">
+<div>
+<span class="eyebrow">Ваши впечатления</span>
+<h2 class="serif">Тёплые слова о чае</h2>
+</div>
+<a class="minimal-link" href="reviews.html">
+                Все отзывы ↗
+            </a>
+</div>
+<div class="review-grid">
+<article class="review-card">
+<div class="review-stars">★★★★★</div>
+<blockquote>
+                    «Очень приятный свежий вкус.
+                    Чай стал моим любимым напитком по утрам».
+                </blockquote>
+<div class="review-name">Анна</div>
+<div class="review-product">Зелёный чай Сенча</div>
+</article>
+<article class="review-card">
+<div class="review-stars">★★★★★</div>
+<blockquote>
+                    «Насыщенный аромат и отличный вкус.
+                    Обязательно закажу ещё».
+                </blockquote>
+<div class="review-name">Александр</div>
+<div class="review-product">Чёрный чай Ассам</div>
+</article>
+<article class="review-card">
+<div class="review-stars">★★★★☆</div>
+<blockquote>
+                    «Очень ароматный сбор.
+                    Понравился мягкий вкус и приятный запах».
+                </blockquote>
+<div class="review-name">Мария</div>
+<div class="review-product">Травяной сбор</div>
+</article>
+</div>
+</div>
+</section>
+<!-- FINAL CTA -->
+<section class="final-cta">
+<span class="eyebrow">Ваш следующий любимый вкус</span>
+<h2 class="serif">
+        Начните с одной чашки.
+    </h2>
+<p>
+        Откройте коллекцию и найдите чай,
+        который станет частью ваших особенных моментов.
+    </p>
+<a class="button-light mt-4" href="catalog.html">
+        Перейти в каталог
+    </a>
+</section>
+<!-- FOOTER -->
+<footer class="footer">
+<div class="container-premium">
+<div class="row g-5">
+<div class="col-lg-4">
+<div class="footer-brand">ЧАЙНЫЙ КЛУБ</div>
+<p class="footer-description">
+                    Пространство чайной культуры,
+                    выразительных вкусов и особенных ритуалов.
+                </p>
+</div>
+<div class="col-6 col-lg-2">
+<h4>Магазин</h4>
+<div class="footer-links">
+<a href="catalog.html">Каталог</a>
+<a href="favorites.html">Избранное</a>
+<a href="cart.html">Корзина</a>
+<a href="product.html">Товар</a>
+<a href="order.html">Заказ</a>
+</div>
+</div>
+<div class="col-6 col-lg-3">
+<h4>Мир чая</h4>
+<div class="footer-links">
+<a href="ceremony.html">Церемонии</a>
+<a href="tea-guide.html">Подбор чая</a>
+<a href="tea-history.html">История чая</a>
+<a href="reviews.html">Отзывы</a>
+</div>
+</div>
+<div class="col-lg-3">
+<h4>Информация</h4>
+<div class="footer-links">
+<a href="contacts.html">Контакты</a>
+<a href="index.html">О клубе</a>
+</div>
+</div>
+</div>
+<div class="footer-bottom">
+<span>© 2026 Чайный клуб</span>
+<span>ИСКУССТВО НАСТОЯЩЕГО ЧАЯ</span>
+</div>
+</div>
+</footer>
 
-    <!-- Подвал сайта -->
-    <footer class="site-footer">
-        <div class="container">
-            <div class="row g-3 align-items-center">
-                <div class="col-12 col-md-6">
-                    <a class="footer-brand" href="index.html">ЧАЙНЫЙ КЛУБ</a>
-                    <p class="footer-text">Место, где чай объединяет людей.</p>
-                </div>
-                <div class="col-12 col-md-6 text-md-end">
-                    <p class="footer-text">© 2026 Чайный клуб</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-    
-    <!-- Bootstrap JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/components.js"></script>
 </body>
 </html>
