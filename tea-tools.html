@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Чайные инструменты — Чайный клуб</title>
+  <meta name="description" content="Практические инструменты Чайного клуба: подбор сорта, расчёт заваривания, сравнение чаёв, планирование церемонии и сочетания с десертами.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/site-components.css" rel="stylesheet">
+  <link href="css/tea-tools.css" rel="stylesheet">
+</head>
+<body>
+  <div data-site-header></div>
+  <main>
+    <section class="tools-hero">
+      <div class="tools-wrap tools-hero__inner">
+        <span class="tools-kicker">ПРАКТИКА ЧАЙНОЙ КУЛЬТУРЫ</span>
+        <h1>Чай начинается<br><em>с вашего выбора.</em></h1>
+        <p>Пять инструментов, которые помогут найти свой вкус, правильно заварить чай и подготовить идеальное чаепитие.</p>
+        <a class="tools-hero__link" href="#tea-finder">Выбрать инструмент <span>↓</span></a>
+      </div>
+      <div class="tools-hero__seal" aria-hidden="true">TEA<br>RITUAL<br>№ 01</div>
+    </section>
+
+    <section class="tools-intro tools-wrap">
+      <div><span class="tools-kicker">ВАШ ЧАЙНЫЙ ПОМОЩНИК</span><h2>Не просто каталог.<br><em>Осознанный выбор.</em></h2></div>
+      <p>Используйте инструменты отдельно или последовательно: подберите сорт, рассчитайте заваривание и узнайте, чем дополнить чашку.</p>
+    </section>
+
+    <section class="tool-section tools-wrap" id="tea-finder">
+      <div class="tool-heading"><span class="tool-number">01</span><div><span class="tools-kicker">НАЙДИТЕ СВОЙ ВКУС</span><h2>Умный подбор чая</h2><p>Ответьте на три вопроса — мы предложим подходящий вариант из коллекции клуба.</p></div></div>
+      <div class="tool-panel finder-grid">
+        <form id="finderForm" class="tool-form">
+          <label class="field-label" for="finderTaste">Какой вкус вам ближе?</label>
+          <select class="tool-select" id="finderTaste"><option value="fresh">Свежий, травянистый</option><option value="rich">Насыщенный, терпкий</option><option value="soft">Мягкий, травяной</option></select>
+          <label class="field-label" for="finderMoment">Когда планируете пить чай?</label>
+          <select class="tool-select" id="finderMoment"><option value="morning">Утром</option><option value="day">Днём</option><option value="evening">Вечером</option></select>
+          <label class="field-label" for="finderGoal">Что для вас важнее?</label>
+          <select class="tool-select" id="finderGoal"><option value="energy">Бодрящий напиток</option><option value="balance">Сбалансированный вкус</option><option value="caffeine-free">Без кофеина</option></select>
+          <button class="tool-button" type="submit">Подобрать чай <span>↗</span></button>
+        </form>
+        <div class="tool-result tool-result--empty" id="finderResult" aria-live="polite"><span class="result-mark">✳</span><h3>Ваш чай ещё не выбран</h3><p>Укажите предпочтения — здесь появится рекомендация с объяснением.</p></div>
+      </div>
+    </section>
+
+    <section class="tool-section tools-wrap" id="brewing-calculator">
+      <div class="tool-heading"><span class="tool-number">02</span><div><span class="tools-kicker">ТОЧНОСТЬ В КАЖДОЙ ЧАШКЕ</span><h2>Калькулятор идеального заваривания</h2><p>Рассчитайте пропорции, температуру и время для выбранного сорта.</p></div></div>
+      <div class="tool-panel brew-grid">
+        <div class="tool-form">
+          <label class="field-label" for="brewTea">Сорт чая</label><select class="tool-select" id="brewTea"><option value="sencha">Зелёный чай Сенча</option><option value="assam">Чёрный чай Ассам</option><option value="herbal">Травяной сбор</option></select>
+          <label class="field-label" for="brewVolume">Объём воды: <strong id="brewVolumeValue">300 мл</strong></label><input class="tool-range" id="brewVolume" type="range" min="150" max="1000" step="50" value="300">
+          <label class="field-label" for="brewStrength">Крепость: <strong id="brewStrengthValue">Обычная</strong></label><input class="tool-range" id="brewStrength" type="range" min="1" max="3" value="2">
+          <div class="brew-stats"><div><span>Чай</span><strong id="brewGrams">6 г</strong></div><div><span>Температура</span><strong id="brewTemp">80°C</strong></div><div><span>Время</span><strong id="brewTime">2:00</strong></div></div>
+        </div>
+        <div class="timer-card"><span class="tools-kicker">ТАЙМЕР ЗАВАРИВАНИЯ</span><div class="timer-display" id="brewTimer" role="timer" aria-live="off">02:00</div><p id="timerStatus" aria-live="polite">Настройки готовы. Запустите таймер, когда зальёте чай водой.</p><div class="timer-actions"><button class="tool-button" id="timerStart" type="button">Начать</button><button class="tool-button tool-button--light" id="timerReset" type="button">Сбросить</button></div></div>
+      </div>
+      <p class="tool-note">Рекомендации ориентировочные: вкус зависит от листа, воды и посуды. Для повторных проливов время заваривания может отличаться.</p>
+    </section>
+
+    <section class="tool-section tools-wrap" id="tea-compare">
+      <div class="tool-heading"><span class="tool-number">03</span><div><span class="tools-kicker">ВЫБИРАЙТЕ ОСОЗНАННО</span><h2>Сравнение сортов чая</h2><p>Сопоставьте характеристики нескольких позиций коллекции в одной таблице.</p></div></div>
+      <div class="tool-panel compare-panel">
+        <div class="compare-controls"><label class="field-label" for="compareOne">Первый сорт</label><select class="tool-select" id="compareOne"><option value="sencha">Сенча</option><option value="assam">Ассам</option><option value="herbal">Травяной сбор</option></select><label class="field-label" for="compareTwo">Второй сорт</label><select class="tool-select" id="compareTwo"><option value="assam">Ассам</option><option value="sencha">Сенча</option><option value="herbal">Травяной сбор</option></select><label class="field-label" for="compareThree">Третий сорт <span>(необязательно)</span></label><select class="tool-select" id="compareThree"><option value="none">Не добавлять</option><option value="herbal">Травяной сбор</option><option value="sencha">Сенча</option><option value="assam">Ассам</option></select></div>
+        <div class="compare-table-wrap"><table class="compare-table"><thead id="compareHead"></thead><tbody id="compareBody"></tbody></table></div>
+        <p class="tool-note">Характеристики заваривания приведены как стартовые рекомендации. Кофеин указан качественно, без лабораторного измерения.</p>
+      </div>
+    </section>
+
+    <section class="tool-section tools-wrap" id="ceremony-calculator">
+      <div class="tool-heading"><span class="tool-number">04</span><div><span class="tools-kicker">ПЛАНИРУЙТЕ ВСТРЕЧУ</span><h2>Калькулятор чайной церемонии</h2><p>Рассчитайте, сколько чая и воды понадобится для компании.</p></div></div>
+      <div class="tool-panel ceremony-grid">
+        <div class="tool-form">
+          <label class="field-label" for="guestCount">Количество гостей</label><input class="tool-input" id="guestCount" type="number" min="1" max="30" value="4">
+          <label class="field-label" for="cupsPerGuest">Чашек на человека</label><input class="tool-input" id="cupsPerGuest" type="number" min="1" max="8" value="2">
+          <label class="field-label" for="cupSize">Объём одной чашки</label><select class="tool-select" id="cupSize"><option value="100">100 мл — небольшая пиала</option><option value="150" selected>150 мл — стандартная чашка</option><option value="200">200 мл — большая чашка</option></select>
+          <label class="field-label" for="ceremonyTea">Выберите чай</label><select class="tool-select" id="ceremonyTea"><option value="sencha">Сенча</option><option value="assam">Ассам</option><option value="herbal">Травяной сбор</option></select>
+        </div>
+        <div class="ceremony-result" aria-live="polite"><span class="tools-kicker">ВАШ РАСЧЁТ</span><div class="ceremony-main"><strong id="ceremonyWater">1,2 л</strong><span>воды понадобится</span></div><div class="ceremony-breakdown"><div><span>Сухой чай</span><strong id="ceremonyGrams">24 г</strong></div><div><span>Всего чашек</span><strong id="ceremonyCups">8</strong></div><div><span>Примерная длительность</span><strong id="ceremonyDuration">35–45 мин</strong></div></div><p>Расчёт сделан с запасом 10% воды и ориентиром 2 г чая на 100 мл. Количество можно скорректировать по вкусу и способу заваривания.</p></div>
+      </div>
+    </section>
+
+    <section class="tool-section tools-wrap" id="tea-pairing">
+      <div class="tool-heading"><span class="tool-number">05</span><div><span class="tools-kicker">СОЗДАЙТЕ ГАРМОНИЮ ВКУСА</span><h2>Гид по сочетанию чая и десертов</h2><p>Выберите угощение — подскажем, какой чай дополнит его вкус.</p></div></div>
+      <div class="tool-panel pairing-grid"><div class="tool-form"><label class="field-label" for="pairingChoice">Что будет на столе?</label><select class="tool-select" id="pairingChoice"><option value="chocolate">Тёмный шоколад</option><option value="pastry">Сдобная выпечка</option><option value="fruit">Фрукты и ягоды</option><option value="cream">Нежный сливочный десерт</option><option value="cheese">Выдержанный сыр</option></select><button class="tool-button" id="pairingButton" type="button">Подобрать сочетание <span>↗</span></button></div><div class="pairing-result" id="pairingResult" aria-live="polite"><span class="result-mark">✳</span><span class="tools-kicker">РЕКОМЕНДАЦИЯ К ЧАЕ</span><h3>Вкусное сочетание начинается с выбора</h3><p>Выберите десерт, и мы предложим пару из коллекции Чайного клуба.</p></div></div>
+    </section>
+
+    <section class="tools-closing"><div class="tools-wrap"><span class="tools-kicker">ВАШ СЛЕДУЮЩИЙ ШАГ</span><h2>Нашли свой вкус?</h2><p>Откройте коллекцию и выберите чай для следующего ритуала.</p><a class="tools-button-light" href="catalog.html">Перейти в каталог <span>↗</span></a></div></section>
+  </main>
+  <script src="js/tea-tools.js"></script>
+  <script src="js/components.js"></script>
+</body>
+</html>

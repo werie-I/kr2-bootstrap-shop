@@ -3,7 +3,7 @@ function renderSiteComponents() {
 
   if (headerHost) {
     const currentPage = window.location.pathname.split("/").pop() || "index.html";
-    const clubPages = ["tea-guide.html", "tea-history.html", "reviews.html", "contacts.html"];
+    const clubPages = ["tea-guide.html", "tea-tools.html", "tea-history.html", "reviews.html", "contacts.html"];
     const clubIsActive = clubPages.includes(currentPage);
     const links = [
       ["index.html", "Главная"],
@@ -34,6 +34,7 @@ function renderSiteComponents() {
               </summary>
               <div class="site-header__dropdown-panel">
                 <a href="tea-guide.html"${currentPage === "tea-guide.html" ? ' aria-current="page"' : ""}>Подбор чая</a>
+                <a href="tea-tools.html"${currentPage === "tea-tools.html" ? ' aria-current="page"' : ""}>Чайные инструменты</a>
                 <a href="tea-history.html"${currentPage === "tea-history.html" ? ' aria-current="page"' : ""}>История чая</a>
                 <a href="reviews.html"${currentPage === "reviews.html" ? ' aria-current="page"' : ""}>Отзывы гостей</a>
                 <a href="contacts.html"${currentPage === "contacts.html" ? ' aria-current="page"' : ""}>Контакты</a>
@@ -74,7 +75,7 @@ function renderSiteComponents() {
       const pageLabels = {
         "catalog.html": "Каталог", "product.html": "Товар", "cart.html": "Корзина",
         "order.html": "Оформление заказа", "ceremony.html": "Церемонии",
-        "booking.html": "Бронирование", "tea-guide.html": "Подбор чая",
+        "booking.html": "Бронирование", "tea-guide.html": "Подбор чая", "tea-tools.html": "Чайные инструменты",
         "tea-history.html": "История чая", "favorites.html": "Избранное",
         "reviews.html": "Отзывы", "contacts.html": "Контакты"
       };
@@ -165,7 +166,7 @@ function renderUnifiedFooter() {
         <a href="catalog.html">Каталог</a><a href="product.html">Коллекция</a><a href="cart.html">Корзина</a><a href="favorites.html">Избранное</a><a href="order.html">Оформление заказа</a>
       </div>
       <div class="site-footer__column"><h2>Мир чая</h2>
-        <a href="ceremony.html">Церемонии</a><a href="tea-guide.html">Подбор чая</a><a href="tea-history.html">История чая</a><a href="reviews.html">Отзывы гостей</a><a href="booking.html">Бронирование</a>
+        <a href="ceremony.html">Церемонии</a><a href="tea-guide.html">Подбор чая</a><a href="tea-tools.html">Чайные инструменты</a><a href="tea-history.html">История чая</a><a href="reviews.html">Отзывы гостей</a><a href="booking.html">Бронирование</a>
       </div>
       <div class="site-footer__column"><h2>Информация</h2>
         <a href="index.html#about">О клубе</a><a href="contacts.html">Контакты</a>
